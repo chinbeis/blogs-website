@@ -1,8 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
-import { writeFile, mkdir } from 'fs/promises'
-import { join } from 'path'
+import { put } from '@vercel/blob'
 import { db, images, NewImage } from '@/lib/db'
 import sharp from 'sharp'
 
@@ -55,10 +54,6 @@ export async function POST(request: NextRequest) {
     const extension = originalName.split('.').pop()
     const filename = `${timestamp}-${Math.random().toString(36).substring(2)}.${extension}`
 
-    // Create upload directory if it doesn't exist
-    const uploadDir = join(process.cwd(), 'public', 'uploads')
-    await mkdir(uploadDir, { recursive: true })
-
     // Optimize image with Sharp
     let processedBuffer = buffer
     if (file.type.startsWith('image/')) {
@@ -68,9 +63,10 @@ export async function POST(request: NextRequest) {
         .toBuffer()
     }
 
-    // Save file
-    const filePath = join(uploadDir, filename)
-    await writeFile(filePath, processedBuffer)
+    // Upload to Vercel Blob
+    const blob = await put(filename, processedBuffer, {
+      access: 'public',
+    })
 
     // Save to database
     const imageData: NewImage = {
@@ -78,7 +74,7 @@ export async function POST(request: NextRequest) {
       originalName,
       mimeType: file.type,
       size: processedBuffer.length,
-      url: `/uploads/${filename}`,
+      url: blob.url,
       alt: alt || '',
       articleId: articleId || null,
       uploadedBy: session.user.id,
