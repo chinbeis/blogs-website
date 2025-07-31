@@ -4,10 +4,10 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 
 export default function ContactSection() {
   return (
-    <section className="py-16 bg-slate-50">
+    <section className="py-16 bg-[#F5F5F5]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-blue-800 mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-[#1a237e] mb-4">
             Contact MSIC
           </h2>
           <p className="text-lg text-gray-700 max-w-2xl mx-auto">
@@ -19,10 +19,10 @@ export default function ContactSection() {
           {/* Contact Information Cards */}
           <Card className="border-gray-200 hover:shadow-lg transition-shadow">
             <CardHeader className="text-center">
-              <div className="w-12 h-12 bg-blue-800 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-12 h-12 bg-[#4682b4] rounded-full flex items-center justify-center mx-auto mb-4">
                 <MapPin className="w-6 h-6 text-white" />
               </div>
-              <CardTitle className="text-blue-800">Address</CardTitle>
+              <CardTitle className="text-[#1a237e]">Address</CardTitle>
             </CardHeader>
             <CardContent className="text-center">
               <p className="text-gray-700 leading-relaxed">
@@ -36,10 +36,10 @@ export default function ContactSection() {
 
           <Card className="border-gray-200 hover:shadow-lg transition-shadow">
             <CardHeader className="text-center">
-              <div className="w-12 h-12 bg-red-600 rounded-full flex items-center justify-center mx-auto mb-4">
+              <div className="w-12 h-12 bg-[#dc2626] rounded-full flex items-center justify-center mx-auto mb-4">
                 <Phone className="w-6 h-6 text-white" />
               </div>
-              <CardTitle className="text-blue-800">Phone</CardTitle>
+              <CardTitle className="text-[#1a237e]">Phone</CardTitle>
             </CardHeader>
             <CardContent className="text-center">
               <p className="text-gray-700 text-lg font-medium">
@@ -53,10 +53,10 @@ export default function ContactSection() {
 
           <Card className="border-gray-200 hover:shadow-lg transition-shadow">
             <CardHeader className="text-center">
-              <div className="w-12 h-12 bg-amber-500 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Mail className="w-6 h-6 text-white" />
+              <div className="w-12 h-12 bg-[#b8860b] rounded-full flex items-center justify-center mx-auto mb-4">
+                <Mail className="w-6 h-6 text-[#36454f]" />
               </div>
-              <CardTitle className="text-blue-800">Email</CardTitle>
+              <CardTitle className="text-[#1a237e]">Email</CardTitle>
             </CardHeader>
             <CardContent className="text-center">
               <p className="text-gray-700 text-lg font-medium">
@@ -71,7 +71,7 @@ export default function ContactSection() {
 
         {/* Call to Action */}
         <div className="text-center mt-12">
-          <Button size="lg" className="bg-blue-800 hover:bg-blue-900 text-white">
+          <Button size="lg" className="bg-[#dc2626] hover:bg-[#b91c1c] text-white">
             <Send className="w-5 h-5 mr-2" />
             Send us a Message
           </Button>

@@ -4,7 +4,7 @@ import { Separator } from "@radix-ui/react-separator"
 
 export function Footer() {
   return (
-    <footer className="bg-[#1e3a8a] text-white">
+    <footer className="bg-[#1a237e] text-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
           {/* Organization Info */}
@@ -22,15 +22,15 @@ export function Footer() {
             </p>
             <div className="space-y-2">
               <div className="flex items-center space-x-2 text-sm">
-                <MapPin className="h-4 w-4 text-[#d97706]" />
+                <MapPin className="h-4 w-4 text-[#b8860b]" />
                 <span>Ulaanbaatar, Mongolia</span>
               </div>
               <div className="flex items-center space-x-2 text-sm">
-                <Mail className="h-4 w-4 text-[#d97706]" />
+                <Mail className="h-4 w-4 text-[#b8860b]" />
                 <span>info@msic.mn</span>
               </div>
               <div className="flex items-center space-x-2 text-sm">
-                <Phone className="h-4 w-4 text-[#d97706]" />
+                <Phone className="h-4 w-4 text-[#b8860b]" />
                 <span>+976 11 123 456</span>
               </div>
             </div>
@@ -38,25 +38,25 @@ export function Footer() {
           
           {/* Quick Links */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-[#d97706]">Quick Links</h4>
+            <h4 className="text-lg font-semibold mb-4 text-[#b8860b]">Quick Links</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-[#d97706] transition-colors">About MSIC</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#d97706] transition-colors">Membership</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#d97706] transition-colors">Education</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#d97706] transition-colors">Research</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#d97706] transition-colors">Guidelines</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#b8860b] transition-colors">About MSIC</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#b8860b] transition-colors">Membership</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#b8860b] transition-colors">Education</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#b8860b] transition-colors">Research</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#b8860b] transition-colors">Guidelines</a></li>
             </ul>
           </div>
           
           {/* Resources */}
           <div>
-            <h4 className="text-lg font-semibold mb-4 text-[#d97706]">Resources</h4>
+            <h4 className="text-lg font-semibold mb-4 text-[#b8860b]">Resources</h4>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-[#d97706] transition-colors">CME Programs</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#d97706] transition-colors">Case Reports</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#d97706] transition-colors">Publications</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#d97706] transition-colors">Events</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-[#d97706] transition-colors">Contact</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#b8860b] transition-colors">CME Programs</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#b8860b] transition-colors">Case Reports</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#b8860b] transition-colors">Publications</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#b8860b] transition-colors">Events</a></li>
+              <li><a href="#" className="text-gray-300 hover:text-[#b8860b] transition-colors">Contact</a></li>
             </ul>
           </div>
         </div>
@@ -69,13 +69,13 @@ export function Footer() {
           </div>
           
           <div className="flex space-x-4">
-            <Button variant="ghost" size="icon" className="text-gray-300 hover:text-[#d97706] hover:bg-white/10">
+            <Button variant="ghost" size="icon" className="text-gray-300 hover:text-[#b8860b] hover:bg-white/10">
               <Facebook className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon" className="text-gray-300 hover:text-[#d97706] hover:bg-white/10">
+            <Button variant="ghost" size="icon" className="text-gray-300 hover:text-[#b8860b] hover:bg-white/10">
               <Twitter className="h-5 w-5" />
             </Button>
-            <Button variant="ghost" size="icon" className="text-gray-300 hover:text-[#d97706] hover:bg-white/10">
+            <Button variant="ghost" size="icon" className="text-gray-300 hover:text-[#b8860b] hover:bg-white/10">
               <Linkedin className="h-5 w-5" />
             </Button>
           </div>

@@ -15,7 +15,7 @@ export function Header() {
   }
 
   return (
-    <header className="bg-[#1e3a8a] text-white shadow-lg">
+    <header className="bg-[#1a237e] text-white shadow-lg">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center space-x-4">
@@ -28,20 +28,20 @@ export function Header() {
             </div>
           </div>
           
-          <nav className="hidden md:flex space-x-8 bg-[#374151] px-6 py-2 rounded-lg">
-            <Link href="/" className="flex items-center space-x-1 text-white hover:text-[#d97706] transition-colors">
+          <nav className="hidden md:flex space-x-8 bg-[#36454f] px-6 py-2 rounded-lg">
+            <Link href="/" className="flex items-center space-x-1 text-white hover:text-[#b8860b] transition-colors">
               <Users className="h-4 w-4" />
               <span>About</span>
             </Link>
-            <Link href="/" className="flex items-center space-x-1 text-white hover:text-[#d97706] transition-colors">
+            <Link href="/" className="flex items-center space-x-1 text-white hover:text-[#b8860b] transition-colors">
               <BookOpen className="h-4 w-4" />
               <span>Education</span>
             </Link>
-            <Link href="/" className="flex items-center space-x-1 text-white hover:text-[#d97706] transition-colors">
+            <Link href="/" className="flex items-center space-x-1 text-white hover:text-[#b8860b] transition-colors">
               <Calendar className="h-4 w-4" />
               <span>Events</span>
             </Link>
-            <Link href="/news" className="flex items-center space-x-1 text-white hover:text-[#d97706] transition-colors">
+            <Link href="/news" className="flex items-center space-x-1 text-white hover:text-[#b8860b] transition-colors">
               <span>News</span>
             </Link>
           </nav>
@@ -49,13 +49,13 @@ export function Header() {
           <div className="flex items-center space-x-4">
             {session?.user ? (
               <Link href="/admin/dashboard">
-                <Button variant="outline" size="sm" className="hidden md:inline-flex border-white text-white bg-transparent hover:bg-white hover:text-[#1e3a8a] transition-colors">
+                <Button variant="outline" size="sm" className="hidden md:inline-flex border-white text-white bg-transparent hover:bg-white hover:text-[#1a237e] transition-colors">
                   Dashboard
                 </Button>
               </Link>
             ) : (
               <Link href="/admin/login">
-                <Button variant="outline" size="sm" className="hidden md:inline-flex border-white text-white bg-transparent hover:bg-white hover:text-[#1e3a8a] transition-colors">
+                <Button variant="outline" size="sm" className="hidden md:inline-flex border-white text-white bg-transparent hover:bg-white hover:text-[#1a237e] transition-colors">
                   Login
                 </Button>
               </Link>
@@ -73,24 +73,24 @@ export function Header() {
         
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-[#374151]">
+          <div className="md:hidden bg-[#36454f]">
             <div className="px-2 pt-2 pb-3 space-y-1">
-              <Link href="/" className="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#d97706] transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link href="/" className="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#b8860b] transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
                 <Users className="h-4 w-4" />
                 <span>About</span>
               </Link>
-              <Link href="/" className="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#d97706] transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link href="/" className="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#b8860b] transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
                 <BookOpen className="h-4 w-4" />
                 <span>Education</span>
               </Link>
-              <Link href="/" className="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#d97706] transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link href="/" className="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#b8860b] transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
                 <Calendar className="h-4 w-4" />
                 <span>Events</span>
               </Link>
-              <Link href="/news" className="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#d97706] transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
+              <Link href="/news" className="flex items-center space-x-2 px-3 py-2 rounded-md text-base font-medium text-white hover:text-[#b8860b] transition-colors" onClick={() => setIsMobileMenuOpen(false)}>
                 <span>News</span>
               </Link>
-              <div className="pt-4 pb-3 border-t border-[#1e3a8a]">
+              <div className="pt-4 pb-3 border-t border-[#1a237e]">
                 {session?.user ? (
                   <Link href="/admin/dashboard" onClick={() => setIsMobileMenuOpen(false)}>
                     <Button variant="outline" size="sm" className="w-full border-white text-white bg-transparent">
