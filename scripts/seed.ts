@@ -5,11 +5,10 @@ import { users } from '../lib/db/schema'
 
 async function seed() {
   const pool = new Pool({
-    host: process.env.DB_HOST || 'localhost',
-    port: parseInt(process.env.DB_PORT || '5432'),
-    user: process.env.DB_USER || 'msic_user',
-    password: process.env.DB_PASSWORD || 'msic_password',
-    database: process.env.DB_NAME || 'msic_db',
+    connectionString: process.env.DATABASE_URL,
+    ssl: {
+      rejectUnauthorized: false
+    }
   })
 
   const db = drizzle(pool)
