@@ -8,22 +8,25 @@
 
 ## Environment Variables
 
-Set up the following environment variables in your Vercel project:
+**IMPORTANT**: Set up the following environment variables directly in your Vercel project dashboard (Project Settings → Environment Variables), NOT in the vercel.json file.
 
 ### Required Variables
 
-```bash
-# Database
-DATABASE_URL="postgresql://username:password@host:port/database?sslmode=require"
+| Variable Name | Description | Example Value |
+|---------------|-------------|---------------|
+| `DATABASE_URL` | PostgreSQL connection string | `postgresql://username:password@host:port/database?sslmode=require` |
+| `NEXTAUTH_URL` | Your deployed application URL | `https://your-domain.vercel.app` |
+| `NEXTAUTH_SECRET` | Random secret for NextAuth | `your-secret-key-here` |
+| `GOOGLE_CLIENT_ID` | Google OAuth client ID | `your-google-client-id` |
+| `GOOGLE_CLIENT_SECRET` | Google OAuth client secret | `your-google-client-secret` |
 
-# NextAuth Configuration
-NEXTAUTH_URL="https://your-domain.vercel.app"
-NEXTAUTH_SECRET="your-secret-key-here"
+### How to Add Environment Variables in Vercel
 
-# Google OAuth (for admin authentication)
-GOOGLE_CLIENT_ID="your-google-client-id"
-GOOGLE_CLIENT_SECRET="your-google-client-secret"
-```
+1. Go to your Vercel project dashboard
+2. Navigate to **Settings** → **Environment Variables**
+3. Add each variable with its corresponding value
+4. Set the environment to **Production** (and optionally Preview/Development)
+5. Click **Save**
 
 ## Deployment Steps
 
