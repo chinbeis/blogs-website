@@ -10,6 +10,8 @@
 
 **IMPORTANT**: Set up the following environment variables directly in your Vercel project dashboard (Project Settings → Environment Variables), NOT in the vercel.json file.
 
+**⚠️ Docker IP Addresses Won't Work**: Do NOT use Docker container IPs (like `172.x.x.x`) or `localhost` for Vercel deployment. Vercel runs in a serverless environment where these local addresses are not accessible. You must use external database services with proper hostnames.
+
 ### Required Variables
 
 | Variable Name | Description | Example Value |
@@ -32,16 +34,24 @@
 
 ### 1. Database Setup
 
-**Option A: Neon (Recommended)**
-1. Go to [neon.tech](https://neon.tech)
-2. Create a new project
-3. Copy the connection string
+**⚠️ Important**: You cannot use Docker containers or localhost databases for Vercel deployment. Choose one of these external database options:
+
+**Option A: External PostgreSQL (Recommended)**
+1. Use services like [Neon](https://neon.tech), [Supabase](https://supabase.com), or [Railway](https://railway.app)
+2. Create a PostgreSQL database
+3. Copy the connection string (format: `postgresql://username:password@hostname:port/database`)
 4. Add `?sslmode=require` to the end
 
 **Option B: Vercel Postgres**
 1. In your Vercel dashboard, go to Storage
 2. Create a new Postgres database
 3. Copy the connection string
+
+**Option C: Migrate from Docker to Cloud**
+If you're currently using Docker locally:
+1. Export your data: `pg_dump -h localhost -U msic_user msic_db > backup.sql`
+2. Set up a cloud database (Option A or B above)
+3. Import your data to the new database
 
 ### 2. Google OAuth Setup
 
