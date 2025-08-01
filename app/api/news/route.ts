@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
-import { db, newsArticles, NewNewsArticle } from '@/lib/db'
+import { db, newsArticles, images, NewNewsArticle, NewImage } from '@/lib/db'
 import { eq, desc } from 'drizzle-orm'
 
 // GET - Fetch all news articles
@@ -44,26 +44,34 @@ export async function POST(request: NextRequest) {
     }
 
     const body = await request.json()
-    const { title, excerpt, content, featuredImage, iconType, gradientFrom, gradientTo, isPublished } = body
+    const { 
+      titleMn, excerptMn, contentMn,
+      titleEn, excerptEn, contentEn,
+      featuredImage, iconType, gradientFrom, gradientTo, isPublished,
+      additionalImages = []
+    } = body
 
-    if (!title || !excerpt || !content) {
+    if (!titleMn || !excerptMn || !contentMn || !titleEn || !excerptEn || !contentEn) {
       return NextResponse.json(
-        { error: 'Title, excerpt, and content are required' },
+        { error: 'All title, excerpt, and content fields are required in both languages' },
         { status: 400 }
       )
     }
 
-    // Generate slug from title
-    const slug = title
+    // Generate slug from English title
+    const slug = titleEn
       .toLowerCase()
       .replace(/[^a-z0-9]+/g, '-')
       .replace(/(^-|-$)/g, '')
 
     const newArticle: NewNewsArticle = {
-      title,
+      titleMn,
+      excerptMn,
+      contentMn,
+      titleEn,
+      excerptEn,
+      contentEn,
       slug,
-      excerpt,
-      content,
       featuredImage,
       iconType: iconType || 'calendar',
       gradientFrom: gradientFrom || 'from-blue-800',
@@ -74,6 +82,22 @@ export async function POST(request: NextRequest) {
     }
 
     const [article] = await db.insert(newsArticles).values(newArticle).returning()
+    
+    // Insert additional images if any
+    if (additionalImages.length > 0) {
+      const imageRecords: NewImage[] = additionalImages.map((img: any) => ({
+        filename: img.url.split('/').pop() || 'unknown',
+        originalName: img.originalName,
+        mimeType: 'image/jpeg', // You might want to detect this properly
+        size: 0, // You might want to store actual file size
+        url: img.url,
+        alt: img.alt || '',
+        articleId: article.id,
+        uploadedBy: session.user.id,
+      }))
+
+      await db.insert(images).values(imageRecords)
+    }
     
     return NextResponse.json(article, { status: 201 })
   } catch (error) {

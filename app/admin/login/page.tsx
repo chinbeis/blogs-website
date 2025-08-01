@@ -78,7 +78,7 @@ export default function AdminLogin() {
         <div className="text-center mb-8">
           <Link href="/" className="inline-flex items-center space-x-3 text-slate-900 hover:text-slate-700 transition-colors">
             <div className="p-2 bg-white rounded-full shadow-lg border border-slate-200">
-              <Heart className="w-8 h-8 text-red-600" />
+              <img src="/logo.svg" alt="Logo" className="w-8 h-8 text-red-600" />
             </div>
             <span className="text-3xl font-bold">MSIC</span>
           </Link>

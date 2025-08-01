@@ -1,3 +1,5 @@
+'use client'
+
 import Image from "next/image";
 import { Header } from "@/components/Header"
 import { Hero } from "@/components/Hero"
@@ -5,8 +7,11 @@ import { FeaturedContent } from "@/components/FeaturedContent"
 import { NewsSection } from "@/components/NewsSection"
 import ContactSection from "@/components/ContactSection"
 import { Footer } from "@/components/Footer"
+import { useLanguage } from "@/lib/language-context"
 
 export default function Home() {
+  const { t } = useLanguage()
+  
   return (
     <div className="min-h-screen bg-white">
       <Header />
@@ -58,10 +63,10 @@ export default function Home() {
             <div className="space-y-8">
               <div>
                 <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 leading-tight">
-                  Upcoming Events
+                  {t('events.title')}
                 </h2>
                 <p className="text-xl text-slate-600 leading-relaxed">
-                  Join us for our latest conferences, workshops, and educational events in interventional cardiology. Our events bring together leading experts, researchers, and practitioners to share knowledge and advance the field.
+                  {t('events.description')}
                 </p>
               </div>
               
@@ -69,32 +74,32 @@ export default function Home() {
                 <div className="flex items-start space-x-4 group">
                   <div className="w-3 h-3 bg-gradient-to-br from-slate-400 to-slate-600 rounded-full mt-2 flex-shrink-0 transition-all duration-300 group-hover:scale-125 group-hover:shadow-lg"></div>
                   <div>
-                    <h3 className="font-bold text-slate-900 text-lg group-hover:text-slate-700 transition-colors">Expert Speakers</h3>
-                    <p className="text-slate-600 mt-1">Learn from renowned cardiologists and industry leaders</p>
+                    <h3 className="font-bold text-slate-900 text-lg group-hover:text-slate-700 transition-colors">{t('events.expertSpeakers')}</h3>
+                    <p className="text-slate-600 mt-1">{t('events.expertSpeakersDesc')}</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-4 group">
                   <div className="w-3 h-3 bg-gradient-to-br from-slate-400 to-slate-600 rounded-full mt-2 flex-shrink-0 transition-all duration-300 group-hover:scale-125 group-hover:shadow-lg"></div>
                   <div>
-                    <h3 className="font-bold text-slate-900 text-lg group-hover:text-slate-700 transition-colors">Hands-on Workshops</h3>
-                    <p className="text-slate-600 mt-1">Practical training sessions with latest techniques</p>
+                    <h3 className="font-bold text-slate-900 text-lg group-hover:text-slate-700 transition-colors">{t('events.workshops')}</h3>
+                    <p className="text-slate-600 mt-1">{t('events.workshopsDesc')}</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-4 group">
                   <div className="w-3 h-3 bg-gradient-to-br from-slate-400 to-slate-600 rounded-full mt-2 flex-shrink-0 transition-all duration-300 group-hover:scale-125 group-hover:shadow-lg"></div>
                   <div>
-                    <h3 className="font-bold text-slate-900 text-lg group-hover:text-slate-700 transition-colors">Networking Opportunities</h3>
-                    <p className="text-slate-600 mt-1">Connect with peers and build professional relationships</p>
+                    <h3 className="font-bold text-slate-900 text-lg group-hover:text-slate-700 transition-colors">{t('events.networking')}</h3>
+                    <p className="text-slate-600 mt-1">{t('events.networkingDesc')}</p>
                   </div>
                 </div>
                 
                 <div className="flex items-start space-x-4 group">
                   <div className="w-3 h-3 bg-gradient-to-br from-slate-400 to-slate-600 rounded-full mt-2 flex-shrink-0 transition-all duration-300 group-hover:scale-125 group-hover:shadow-lg"></div>
                   <div>
-                    <h3 className="font-bold text-slate-900 text-lg group-hover:text-slate-700 transition-colors">Continuing Education</h3>
-                    <p className="text-slate-600 mt-1">Earn CME credits while staying current with advances</p>
+                    <h3 className="font-bold text-slate-900 text-lg group-hover:text-slate-700 transition-colors">{t('events.education')}</h3>
+                    <p className="text-slate-600 mt-1">{t('events.educationDesc')}</p>
                   </div>
                 </div>
               </div>

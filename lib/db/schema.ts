@@ -16,10 +16,16 @@ export const users = pgTable('users', {
 // News articles table
 export const newsArticles = pgTable('news_articles', {
   id: uuid('id').primaryKey().defaultRandom(),
-  title: text('title').notNull(),
+  // Mongolian content
+  titleMn: text('title_mn').notNull(),
+  excerptMn: text('excerpt_mn').notNull(),
+  contentMn: text('content_mn').notNull(),
+  // English content
+  titleEn: text('title_en').notNull(),
+  excerptEn: text('excerpt_en').notNull(),
+  contentEn: text('content_en').notNull(),
+  // Common fields
   slug: text('slug').notNull().unique(),
-  excerpt: text('excerpt').notNull(),
-  content: text('content').notNull(),
   featuredImage: text('featured_image'),
   iconType: text('icon_type').notNull().default('calendar'),
   gradientFrom: text('gradient_from').notNull().default('from-blue-800'),

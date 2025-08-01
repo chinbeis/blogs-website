@@ -173,7 +173,7 @@ export default function EditArticle({ params }: { params: Promise<{ id: string }
                 <ArrowLeft className="w-5 h-5 text-gray-600" />
               </Link>
               <Link href="/" className="flex items-center space-x-2">
-                <Heart className="w-8 h-8 text-red-600" />
+                <img src="/logo.svg" alt="Logo" className="w-8 h-8 text-red-600" />
                 <span className="text-xl font-bold text-blue-800">MSIC Admin</span>
               </Link>
             </div>

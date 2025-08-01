@@ -1,8 +1,13 @@
+'use client'
+
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
 import { BookOpen, FileText, Calendar, ArrowRight, Star, Sparkles } from "lucide-react"
+import { useLanguage } from "@/lib/language-context"
 
 export function FeaturedContent() {
+  const { t } = useLanguage()
+  
   return (
     <section className="py-20 bg-gradient-to-br from-slate-50 via-white to-slate-100 relative overflow-hidden">
       {/* Animated Background Decorations */}
@@ -25,7 +30,6 @@ export function FeaturedContent() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Enhanced Header Section */}
         <div className="text-center mb-16 relative">
-          {/* Decorative elements around title */}
           <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
             <div className="flex items-center space-x-2 opacity-60">
               <Star className="w-4 h-4 text-slate-400 animate-pulse" />
@@ -37,181 +41,78 @@ export function FeaturedContent() {
           </div>
           
           <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6 relative">
-            Featured Content
-            {/* Subtle text decoration */}
+            {t('featured.title')}
             <div className="absolute -bottom-2 left-1/2 transform -translate-x-1/2 w-24 h-1 bg-gradient-to-r from-slate-300 via-slate-500 to-slate-300 rounded-full opacity-60"></div>
           </h2>
           
           <p className="text-xl text-slate-600 max-w-4xl mx-auto leading-relaxed">
-            Explore our educational resources, case studies, and upcoming events designed to advance your knowledge in interventional cardiology.
+            {t('featured.subtitle')}
           </p>
         </div>
         
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
-          {/* CME Section */}
-          <div className="group relative">
-            {/* Card background glow */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-slate-200/50 to-slate-300/50 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            
-            <Card className="relative border-0 shadow-xl hover:shadow-2xl transition-all duration-500 bg-white/90 backdrop-blur-sm rounded-2xl overflow-hidden group-hover:-translate-y-2">
-              {/* Decorative top border */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-slate-600 via-slate-700 to-slate-600"></div>
-              
-              {/* Floating particles */}
-              <div className="absolute top-4 right-4 w-2 h-2 bg-slate-300/60 rounded-full animate-bounce opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ animationDelay: '0.5s' }}></div>
-              <div className="absolute top-8 right-8 w-1 h-1 bg-slate-400/40 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ animationDelay: '1s' }}></div>
-              
-              <CardHeader className="text-center pb-6 pt-8">
-                <div className="relative mx-auto w-20 h-20 mb-6">
-                  {/* Icon background with gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-slate-600 to-slate-800 rounded-full shadow-lg group-hover:shadow-xl transition-shadow duration-300"></div>
-                  {/* Outer ring animation */}
-                  <div className="absolute -inset-2 border-2 border-slate-300/30 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-spin transition-opacity duration-300" style={{ animationDuration: '3s' }}></div>
-                  <div className="relative w-full h-full flex items-center justify-center">
-                    <BookOpen className="w-10 h-10 text-white group-hover:scale-110 transition-transform duration-300" />
-                  </div>
-                </div>
-                <CardTitle className="text-2xl text-slate-900 group-hover:text-slate-700 transition-colors duration-300">
-                  Continuing Medical Education
-                </CardTitle>
-              </CardHeader>
-              
-              <CardContent className="text-center px-8 pb-8">
-                <p className="text-slate-600 mb-8 leading-relaxed">
-                  Access our comprehensive CME programs designed to keep you updated with the latest advances in interventional cardiology.
-                </p>
-                
-                {/* Enhanced info boxes */}
-                <div className="space-y-4 mb-8">
-                  <div className="text-left p-4 bg-slate-50/80 rounded-xl group-hover:bg-slate-100/80 transition-colors duration-300">
-                    <h4 className="font-bold text-slate-900 text-sm mb-1">Latest Course</h4>
-                    <p className="text-sm text-slate-600">Advanced PCI Techniques</p>
-                  </div>
-                  <div className="text-left p-4 bg-slate-50/80 rounded-xl group-hover:bg-slate-100/80 transition-colors duration-300">
-                    <h4 className="font-bold text-slate-900 text-sm mb-1">Credits Available</h4>
-                    <p className="text-sm text-slate-600">15 CME Credits</p>
-                  </div>
-                </div>
-                
-                <Button className="w-full bg-gradient-to-r from-slate-800 to-slate-900 text-white hover:from-slate-700 hover:to-slate-800 transition-all duration-300 rounded-xl py-3 shadow-lg hover:shadow-xl group/btn">
-                  <span className="flex items-center justify-center">
-                    View CME Programs
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                  </span>
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-          
-          {/* Case Reports Section */}
-          <div className="group relative">
-            {/* Card background glow */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-slate-300/50 to-slate-400/50 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            
-            <Card className="relative border-0 shadow-xl hover:shadow-2xl transition-all duration-500 bg-white/90 backdrop-blur-sm rounded-2xl overflow-hidden group-hover:-translate-y-2">
-              {/* Decorative top border */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-slate-500 via-slate-600 to-slate-500"></div>
-              
-              {/* Floating particles */}
-              <div className="absolute top-6 right-6 w-2 h-2 bg-slate-400/50 rounded-full animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ animationDelay: '0.3s' }}></div>
-              <div className="absolute top-12 right-12 w-1 h-1 bg-slate-300/60 rounded-full animate-bounce opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ animationDelay: '0.8s' }}></div>
-              
-              <CardHeader className="text-center pb-6 pt-8">
-                <div className="relative mx-auto w-20 h-20 mb-6">
-                  {/* Icon background with gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-slate-500 to-slate-700 rounded-full shadow-lg group-hover:shadow-xl transition-shadow duration-300"></div>
-                  {/* Pulse effect */}
-                  <div className="absolute -inset-3 bg-slate-400/20 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-ping transition-opacity duration-300"></div>
-                  <div className="relative w-full h-full flex items-center justify-center">
-                    <FileText className="w-10 h-10 text-white group-hover:scale-110 transition-transform duration-300" />
-                  </div>
-                </div>
-                <CardTitle className="text-2xl text-slate-900 group-hover:text-slate-700 transition-colors duration-300">
-                  Case Reports
-                </CardTitle>
-              </CardHeader>
-              
-              <CardContent className="text-center px-8 pb-8">
-                <p className="text-slate-600 mb-8 leading-relaxed">
-                  Explore detailed case studies and clinical reports from leading interventional cardiologists in Mongolia and beyond.
-                </p>
-                
-                {/* Enhanced info boxes */}
-                <div className="space-y-4 mb-8">
-                  <div className="text-left p-4 bg-slate-50/80 rounded-xl group-hover:bg-slate-100/80 transition-colors duration-300">
-                    <h4 className="font-bold text-slate-900 text-sm mb-1">Recent Case</h4>
-                    <p className="text-sm text-slate-600">Complex CTO Intervention</p>
-                  </div>
-                  <div className="text-left p-4 bg-slate-50/80 rounded-xl group-hover:bg-slate-100/80 transition-colors duration-300">
-                    <h4 className="font-bold text-slate-900 text-sm mb-1">Total Cases</h4>
-                    <p className="text-sm text-slate-600">150+ Published Cases</p>
-                  </div>
-                </div>
-                
-                <Button className="w-full bg-gradient-to-r from-slate-600 to-slate-700 text-white hover:from-slate-500 hover:to-slate-600 transition-all duration-300 rounded-xl py-3 shadow-lg hover:shadow-xl group/btn">
-                  <span className="flex items-center justify-center">
-                    Browse Case Reports
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                  </span>
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
-          
-          {/* Upcoming Events Section */}
-          <div className="group relative">
-            {/* Card background glow */}
-            <div className="absolute -inset-1 bg-gradient-to-r from-slate-200/50 to-slate-400/50 rounded-2xl blur opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-            
-            <Card className="relative border-0 shadow-xl hover:shadow-2xl transition-all duration-500 bg-white/90 backdrop-blur-sm rounded-2xl overflow-hidden group-hover:-translate-y-2">
-              {/* Decorative top border */}
-              <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-slate-600 via-slate-700 to-slate-600"></div>
-              
-              {/* Floating particles */}
-              <div className="absolute top-5 right-5 w-2 h-2 bg-slate-300/50 rounded-full animate-pulse opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ animationDelay: '0.7s' }}></div>
-              <div className="absolute top-10 right-10 w-1 h-1 bg-slate-400/60 rounded-full animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-300" style={{ animationDelay: '0.2s' }}></div>
-              
-              <CardHeader className="text-center pb-6 pt-8">
-                <div className="relative mx-auto w-20 h-20 mb-6">
-                  {/* Icon background with gradient */}
-                  <div className="absolute inset-0 bg-gradient-to-br from-slate-600 to-slate-800 rounded-full shadow-lg group-hover:shadow-xl transition-shadow duration-300"></div>
-                  {/* Rotating border */}
-                  <div className="absolute -inset-2 border-2 border-dashed border-slate-300/40 rounded-full opacity-0 group-hover:opacity-100 group-hover:animate-spin transition-opacity duration-300" style={{ animationDuration: '4s' }}></div>
-                  <div className="relative w-full h-full flex items-center justify-center">
-                    <Calendar className="w-10 h-10 text-white group-hover:scale-110 transition-transform duration-300" />
-                  </div>
-                </div>
-                <CardTitle className="text-2xl text-slate-900 group-hover:text-slate-700 transition-colors duration-300">
-                  Upcoming Events
-                </CardTitle>
-              </CardHeader>
-              
-              <CardContent className="text-center px-8 pb-8">
-                <p className="text-slate-600 mb-8 leading-relaxed">
-                  Join us for upcoming conferences, workshops, and training sessions to enhance your interventional cardiology skills.
-                </p>
-                
-                {/* Enhanced info boxes */}
-                <div className="space-y-4 mb-8">
-                  <div className="text-left p-4 bg-slate-50/80 rounded-xl group-hover:bg-slate-100/80 transition-colors duration-300">
-                    <h4 className="font-bold text-slate-900 text-sm mb-1">Next Event</h4>
-                    <p className="text-sm text-slate-600">Annual MSIC Conference 2024</p>
-                  </div>
-                  <div className="text-left p-4 bg-slate-50/80 rounded-xl group-hover:bg-slate-100/80 transition-colors duration-300">
-                    <h4 className="font-bold text-slate-900 text-sm mb-1">Date</h4>
-                    <p className="text-sm text-slate-600">March 15-17, 2024</p>
-                  </div>
-                </div>
-                
-                <Button className="w-full bg-gradient-to-r from-slate-800 to-slate-900 text-white hover:from-slate-700 hover:to-slate-800 transition-all duration-300 rounded-xl py-3 shadow-lg hover:shadow-xl group/btn">
-                  <span className="flex items-center justify-center">
-                    View All Events
-                    <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform duration-300" />
-                  </span>
-                </Button>
-              </CardContent>
-            </Card>
-          </div>
+          {/* Clinical Guidelines Card */}
+          <Card className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-white/80 backdrop-blur-sm">
+            <CardHeader className="text-center pb-4">
+              <div className="mx-auto mb-4 p-4 bg-gradient-to-br from-blue-500 to-blue-600 rounded-2xl w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <BookOpen className="w-8 h-8 text-white" />
+              </div>
+              <CardTitle className="text-2xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                {t('featured.guidelines')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-center">
+              <p className="text-slate-600 mb-6 leading-relaxed">
+                {t('featured.guidelinesDesc')}
+              </p>
+              <Button className="group/btn bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg transition-all duration-300 hover:shadow-lg">
+                {t('featured.learnMore')}
+                <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* CME Programs Card */}
+          <Card className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-white/80 backdrop-blur-sm">
+            <CardHeader className="text-center pb-4">
+              <div className="mx-auto mb-4 p-4 bg-gradient-to-br from-emerald-500 to-emerald-600 rounded-2xl w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <FileText className="w-8 h-8 text-white" />
+              </div>
+              <CardTitle className="text-2xl font-bold text-slate-900 group-hover:text-emerald-600 transition-colors">
+                {t('featured.cme')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-center">
+              <p className="text-slate-600 mb-6 leading-relaxed">
+                {t('featured.cmeDesc')}
+              </p>
+              <Button className="group/btn bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg transition-all duration-300 hover:shadow-lg">
+                {t('featured.viewAll')}
+                <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Case Studies Card */}
+          <Card className="group hover:shadow-2xl transition-all duration-500 transform hover:-translate-y-2 border-0 bg-white/80 backdrop-blur-sm">
+            <CardHeader className="text-center pb-4">
+              <div className="mx-auto mb-4 p-4 bg-gradient-to-br from-purple-500 to-purple-600 rounded-2xl w-16 h-16 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
+                <Calendar className="w-8 h-8 text-white" />
+              </div>
+              <CardTitle className="text-2xl font-bold text-slate-900 group-hover:text-purple-600 transition-colors">
+                {t('featured.cases')}
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-center">
+              <p className="text-slate-600 mb-6 leading-relaxed">
+                {t('featured.casesDesc')}
+              </p>
+              <Button className="group/btn bg-purple-600 hover:bg-purple-700 text-white px-6 py-2 rounded-lg transition-all duration-300 hover:shadow-lg">
+                {t('featured.learnMore')}
+                <ArrowRight className="ml-2 w-4 h-4 group-hover/btn:translate-x-1 transition-transform" />
+              </Button>
+            </CardContent>
+          </Card>
         </div>
       </div>
     </section>

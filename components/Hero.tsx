@@ -1,7 +1,12 @@
+'use client'
+
 import { Button } from "@/components/ui/button"
-import { ArrowRight, Heart, Award, Users, Activity, Stethoscope } from "lucide-react"
+import { ArrowRight, Award, Users, Activity, Stethoscope } from "lucide-react"
+import { useLanguage } from "@/lib/language-context"
 
 export function Hero() {
+  const { t } = useLanguage()
+  
   return (
     <section className="relative py-20 overflow-hidden bg-white">
       {/* Enhanced Background Elements */}
@@ -71,69 +76,46 @@ export function Hero() {
         </div>
       </div>
       
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <div className="flex justify-center mb-6">
-            <div className="flex items-center space-x-2 rounded-full px-6 py-3 bg-white border-2 border-slate-200 shadow-lg backdrop-blur-sm">
-              <Heart className="h-5 w-5 text-red-600" />
-              <span className="text-sm font-medium text-slate-700">Leading Cardiovascular Care in Mongolia</span>
-            </div>
+      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+        <h1 className="text-4xl md:text-6xl font-bold text-slate-900 mb-6 leading-tight">
+          {t('hero.title')}
+        </h1>
+        
+        <p className="text-xl text-slate-600 mb-8 max-w-3xl mx-auto leading-relaxed">
+          {t('hero.subtitle')}
+        </p>
+        
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
+          <Button size="lg" className="bg-slate-900 text-white hover:bg-slate-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            {t('hero.joinSociety')}
+            <ArrowRight className="ml-2 h-5 w-5" />
+          </Button>
+          <Button size="lg" variant="outline" className="border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
+            {t('hero.learnMore')}
+          </Button>
+        </div>
+        
+        {/* Stats Section */}
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <Users className="h-8 w-8 text-slate-700 mx-auto mb-3" />
+            <div className="text-3xl font-bold text-slate-900 mb-1">500+</div>
+            <div className="text-sm text-slate-600 font-medium">{t('hero.members')}</div>
           </div>
-          
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 text-slate-900">
-            Advancing
-            <span className="text-slate-700"> Interventional</span>
-            <br />
-            <span className="text-slate-800 relative">
-              Cardiology
-              <div className="absolute -bottom-2 left-0 right-0 h-1 bg-gradient-to-r from-slate-300 via-slate-400 to-slate-300 opacity-30 rounded-full"></div>
-            </span> Excellence
-          </h1>
-          
-          <p className="text-xl mb-8 max-w-3xl mx-auto text-slate-600 leading-relaxed">
-            The Mongolian Society of Interventional Cardiology is dedicated to improving cardiovascular health 
-            through cutting-edge research, education, and clinical excellence.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button size="lg" className="bg-slate-900 text-white hover:bg-slate-800 transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1">
-              Join Our Society
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-            <Button variant="outline" size="lg" className="border-2 border-slate-900 text-slate-900 bg-white hover:bg-slate-900 hover:text-white transition-all duration-300 shadow-md hover:shadow-lg">
-              Learn More
-            </Button>
+          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <Activity className="h-8 w-8 text-slate-700 mx-auto mb-3" />
+            <div className="text-3xl font-bold text-slate-900 mb-1">50+</div>
+            <div className="text-sm text-slate-600 font-medium">{t('hero.events')}</div>
           </div>
-          
-          {/* Enhanced Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-4xl mx-auto">
-            <div className="text-center group">
-              <div className="flex justify-center mb-3">
-                <div className="p-3 bg-gradient-to-br from-slate-100 to-slate-200 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
-                  <Users className="h-8 w-8 text-slate-700" />
-                </div>
-              </div>
-              <div className="text-3xl font-bold mb-1 text-slate-900">500+</div>
-              <div className="text-slate-600">Active Members</div>
-            </div>
-            <div className="text-center group">
-              <div className="flex justify-center mb-3">
-                <div className="p-3 bg-gradient-to-br from-slate-100 to-slate-200 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
-                  <Award className="h-8 w-8 text-slate-700" />
-                </div>
-              </div>
-              <div className="text-3xl font-bold mb-1 text-slate-900">15+</div>
-              <div className="text-slate-600">Years of Excellence</div>
-            </div>
-            <div className="text-center group">
-              <div className="flex justify-center mb-3">
-                <div className="p-3 bg-gradient-to-br from-red-50 to-red-100 rounded-full shadow-md group-hover:shadow-lg transition-all duration-300">
-                  <Heart className="h-8 w-8 text-red-600" />
-                </div>
-              </div>
-              <div className="text-3xl font-bold mb-1 text-slate-900">10,000+</div>
-              <div className="text-slate-600">Lives Improved</div>
-            </div>
+          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <Award className="h-8 w-8 text-slate-700 mx-auto mb-3" />
+            <div className="text-3xl font-bold text-slate-900 mb-1">200+</div>
+            <div className="text-sm text-slate-600 font-medium">{t('hero.publications')}</div>
+          </div>
+          <div className="bg-white/80 backdrop-blur-sm p-6 rounded-xl shadow-lg border border-slate-200 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            <Stethoscope className="h-8 w-8 text-slate-700 mx-auto mb-3" />
+            <div className="text-3xl font-bold text-slate-900 mb-1">15+</div>
+            <div className="text-sm text-slate-600 font-medium">{t('hero.years')}</div>
           </div>
         </div>
       </div>

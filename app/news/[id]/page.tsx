@@ -4,8 +4,16 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { Heart, ArrowLeft, Calendar, User, Share2, Eye } from 'lucide-react'
+import { Heart, ArrowLeft, Calendar, User, Share2, Eye, X, ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
+import Image from 'next/image'
+
+interface NewsImage {
+  id: string
+  url: string
+  alt: string
+  originalName: string
+}
 
 interface NewsArticle {
   id: string
@@ -20,6 +28,7 @@ interface NewsArticle {
   createdAt: string
   author?: string
   slug: string
+  images?: NewsImage[]
 }
 
 export default function NewsArticlePage() {
@@ -27,6 +36,8 @@ export default function NewsArticlePage() {
   const [article, setArticle] = useState<NewsArticle | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const [selectedImage, setSelectedImage] = useState<NewsImage | null>(null)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
 
   useEffect(() => {
     if (params.id) {
@@ -77,6 +88,29 @@ export default function NewsArticlePage() {
     }
   }
 
+  const openImageModal = (image: NewsImage, index: number) => {
+    setSelectedImage(image)
+    setCurrentImageIndex(index)
+  }
+
+  const closeImageModal = () => {
+    setSelectedImage(null)
+  }
+
+  const navigateImage = (direction: 'prev' | 'next') => {
+    if (!article?.images) return
+    
+    let newIndex = currentImageIndex
+    if (direction === 'prev') {
+      newIndex = currentImageIndex > 0 ? currentImageIndex - 1 : article.images.length - 1
+    } else {
+      newIndex = currentImageIndex < article.images.length - 1 ? currentImageIndex + 1 : 0
+    }
+    
+    setCurrentImageIndex(newIndex)
+    setSelectedImage(article.images[newIndex])
+  }
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-white">
@@ -95,7 +129,7 @@ export default function NewsArticlePage() {
                 <span>Back to News</span>
               </Link>
               <div className="flex items-center space-x-2">
-                <Heart className="w-8 h-8 text-red-600" />
+                <img src="/logo.svg" alt="Logo" className="w-8 h-8 text-red-600" />
                 <span className="text-2xl font-bold">MSIC</span>
               </div>
             </div>
@@ -136,7 +170,7 @@ export default function NewsArticlePage() {
                 <span>Back to News</span>
               </Link>
               <div className="flex items-center space-x-2">
-                <Heart className="w-8 h-8 text-red-600" />
+               <img src="/logo.svg" alt="Logo" className="w-8 h-8 text-red-600" />
                 <span className="text-2xl font-bold">MSIC</span>
               </div>
             </div>
@@ -180,7 +214,7 @@ export default function NewsArticlePage() {
               <span>Back to News</span>
             </Link>
             <div className="flex items-center space-x-2">
-              <Heart className="w-8 h-8 text-red-600" />
+              <img src="/logo.svg" alt="Logo" className="w-8 h-8 text-red-600" />
               <span className="text-2xl font-bold">MSIC</span>
             </div>
           </div>
@@ -234,7 +268,7 @@ export default function NewsArticlePage() {
         )}
 
         {/* Article Content */}
-        <Card className="border-0 shadow-lg bg-white">
+        <Card className="border-0 shadow-lg bg-white mb-8">
           <CardContent className="p-8">
             <div 
               className="prose prose-lg max-w-none prose-slate"
@@ -246,6 +280,44 @@ export default function NewsArticlePage() {
             />
           </CardContent>
         </Card>
+
+        {/* Image Gallery */}
+        {article.images && article.images.length > 0 && (
+          <Card className="border-0 shadow-lg bg-white mb-8">
+            <CardContent className="p-8">
+              <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center space-x-2">
+                <Eye className="w-6 h-6 text-blue-600" />
+                <span>Image Gallery</span>
+              </h3>
+              
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {article.images.map((image, index) => (
+                  <div 
+                    key={image.id} 
+                    className="relative group cursor-pointer overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105"
+                    onClick={() => openImageModal(image, index)}
+                  >
+                    <Image
+                      src={image.url}
+                      alt={image.alt || `Gallery image ${index + 1}`}
+                      width={300}
+                      height={200}
+                      className="w-full h-32 md:h-40 object-cover"
+                    />
+                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
+                      <Eye className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+                    {image.alt && (
+                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
+                        <p className="text-white text-xs truncate">{image.alt}</p>
+                      </div>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </CardContent>
+          </Card>
+        )}
 
         {/* Article Footer */}
         <footer className="mt-12 pt-8 border-t border-slate-200">
@@ -278,7 +350,7 @@ export default function NewsArticlePage() {
         </div>
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <Heart className="w-6 h-6 text-red-600" />
+            <img src="/logo.svg" alt="Logo" className="w-6 h-6 text-red-600" />
             <span className="text-xl font-bold">MSIC</span>
           </div>
           <p className="text-white/80">

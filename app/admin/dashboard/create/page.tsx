@@ -138,7 +138,7 @@ export default function CreateNewsPage() {
               <span>Back to Dashboard</span>
             </Link>
             <div className="flex items-center space-x-2">
-              <Heart className="w-8 h-8 text-red-600" />
+                <img src="/logo.svg" alt="Logo" className="w-8 h-8" />
               <span className="text-2xl font-bold">MSIC Admin</span>
             </div>
           </div>

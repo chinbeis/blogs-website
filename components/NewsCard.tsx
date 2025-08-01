@@ -1,42 +1,57 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Calendar, Award, Users, BookOpen, Globe, Stethoscope } from "lucide-react"
-import { cn } from "@/lib/utils"
+'use client'
 
-interface NewsCardProps {
-  title: string
-  date: string
-  excerpt: string
-  href?: string
-  iconType?: 'calendar' | 'award' | 'users' | 'book' | 'globe' | 'stethoscope'
-  gradientFrom: string
-  gradientTo: string
-  featuredImage?: string
-}
+import { useLanguage } from '@/lib/language-context'
+import { cn } from "@/lib/utils"
+import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Button } from '@/components/ui/button'
+import { ArrowRight, Calendar, Award, Users, Book, Globe, Stethoscope } from 'lucide-react'
+import Link from 'next/link'
 
 const iconMap = {
   calendar: Calendar,
   award: Award,
   users: Users,
-  book: BookOpen,
+  book: Book,
   globe: Globe,
   stethoscope: Stethoscope,
 }
 
-export function NewsCard({ 
-  title, 
-  date, 
-  excerpt, 
-  href = "#", 
-  iconType = 'calendar',
+interface NewsCardProps {
+  id: string
+  titleMn: string
+  titleEn: string
+  excerptMn: string
+  excerptEn: string
+  featuredImage?: string
+  iconType: string
+  gradientFrom: string
+  gradientTo: string
+  date: string
+  href: string
+}
+
+export default function NewsCard({
+  id,
+  titleMn,
+  titleEn,
+  excerptMn,
+  excerptEn,
+  featuredImage,
+  iconType,
   gradientFrom,
   gradientTo,
-  featuredImage
+  date,
+  href
 }: NewsCardProps) {
-  const Icon = iconMap[iconType]
+  const { language } = useLanguage()
+  
+  const title = language === 'mn' ? titleMn : titleEn
+  const excerpt = language === 'mn' ? excerptMn : excerptEn
+  
+  const Icon = iconMap[iconType as keyof typeof iconMap] || Calendar
   
   return (
-    <Card className="bg-white shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border-0">
+    <Card className="group relative overflow-hidden rounded-2xl bg-white shadow-lg transition-all duration-300 hover:shadow-2xl hover:-translate-y-1">
       <CardHeader className="p-0">
         {featuredImage ? (
           <div className="h-48 relative overflow-hidden">
@@ -45,9 +60,6 @@ export function NewsCard({
               alt={title}
               className="w-full h-full object-cover transition-transform duration-300 hover:scale-105"
             />
-            <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
-              <Icon className="w-12 h-12 text-white drop-shadow-lg" />
-            </div>
           </div>
         ) : (
           <div className={cn(
@@ -67,12 +79,15 @@ export function NewsCard({
           {excerpt}
         </p>
         <Button variant="link" className="p-0 h-auto font-medium group" asChild>
-          <a href={href}>
+          <Link href={href}>
             Read more
             <ArrowRight className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" />
-          </a>
+          </Link>
         </Button>
       </CardContent>
     </Card>
   )
 }
+
+// Also export as named export for compatibility
+export { NewsCard }
