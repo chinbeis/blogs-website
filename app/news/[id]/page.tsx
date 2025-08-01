@@ -7,6 +7,7 @@ import { Card, CardContent } from '@/components/ui/card'
 import { Heart, ArrowLeft, Calendar, User, Share2, Eye, X, ChevronLeft, ChevronRight } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
+import { useLanguage } from '@/lib/language-context'
 
 interface NewsImage {
   id: string
@@ -17,9 +18,12 @@ interface NewsImage {
 
 interface NewsArticle {
   id: string
-  title: string
-  content: string
-  excerpt: string
+  titleMn: string
+  titleEn: string
+  contentMn: string
+  contentEn: string
+  excerptMn: string
+  excerptEn: string
   featuredImage?: string
   iconType: 'calendar' | 'award' | 'users' | 'book' | 'globe' | 'stethoscope'
   gradientFrom: string
@@ -32,6 +36,7 @@ interface NewsArticle {
 }
 
 export default function NewsArticlePage() {
+  const { t, language } = useLanguage()
   const params = useParams()
   const [article, setArticle] = useState<NewsArticle | null>(null)
   const [isLoading, setIsLoading] = useState(true)
@@ -63,7 +68,7 @@ export default function NewsArticlePage() {
   }
 
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
+    return new Date(dateString).toLocaleDateString(language === 'mn' ? 'mn-MN' : 'en-US', {
       year: 'numeric',
       month: 'long',
       day: 'numeric'
@@ -72,10 +77,12 @@ export default function NewsArticlePage() {
 
   const shareArticle = async () => {
     if (navigator.share && article) {
+      const title = language === 'mn' ? article.titleMn : article.titleEn
+      const excerpt = language === 'mn' ? article.excerptMn : article.excerptEn
       try {
         await navigator.share({
-          title: article.title,
-          text: article.excerpt,
+          title: title,
+          text: excerpt,
           url: window.location.href,
         })
       } catch (error) {
@@ -113,88 +120,33 @@ export default function NewsArticlePage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen bg-white">
-        {/* Header */}
-        <header className="bg-slate-900 text-white py-6 relative overflow-hidden">
-          {/* Subtle decorative elements */}
-          <div className="absolute inset-0">
-            <div className="absolute top-2 left-10 w-16 h-16 border border-slate-700 rounded-full opacity-20"></div>
-            <div className="absolute bottom-2 right-20 w-12 h-12 border border-slate-600 rounded-full opacity-15"></div>
-            <div className="absolute top-1/2 left-1/3 w-2 h-2 bg-slate-600 rounded-full opacity-30"></div>
-          </div>
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between">
-              <Link href="/news" className="flex items-center space-x-2 hover:text-slate-300 transition-colors">
-                <ArrowLeft className="w-5 h-5" />
-                <span>Back to News</span>
-              </Link>
-              <div className="flex items-center space-x-2">
-                <img src="/logo.svg" alt="Logo" className="w-8 h-8 text-red-600" />
-                <span className="text-2xl font-bold">MSIC</span>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        {/* Loading Content */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-          <div className="animate-pulse">
-            <div className="h-8 bg-slate-200 rounded mb-4"></div>
-            <div className="h-4 bg-slate-200 rounded mb-6 w-1/3"></div>
-            <div className="h-64 bg-slate-200 rounded mb-8"></div>
-            <div className="space-y-4">
-              <div className="h-4 bg-slate-200 rounded"></div>
-              <div className="h-4 bg-slate-200 rounded"></div>
-              <div className="h-4 bg-slate-200 rounded w-3/4"></div>
-            </div>
-          </div>
-        </div>
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-slate-900"></div>
       </div>
     )
   }
 
   if (error || !article) {
     return (
-      <div className="min-h-screen bg-white">
-        {/* Header */}
-        <header className="bg-slate-900 text-white py-6 relative overflow-hidden">
-          {/* Subtle decorative elements */}
-          <div className="absolute inset-0">
-            <div className="absolute top-2 left-10 w-16 h-16 border border-slate-700 rounded-full opacity-20"></div>
-            <div className="absolute bottom-2 right-20 w-12 h-12 border border-slate-600 rounded-full opacity-15"></div>
-          </div>
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex items-center justify-between">
-              <Link href="/news" className="flex items-center space-x-2 hover:text-slate-300 transition-colors">
-                <ArrowLeft className="w-5 h-5" />
-                <span>Back to News</span>
-              </Link>
-              <div className="flex items-center space-x-2">
-               <img src="/logo.svg" alt="Logo" className="w-8 h-8 text-red-600" />
-                <span className="text-2xl font-bold">MSIC</span>
-              </div>
-            </div>
-          </div>
-        </header>
-
-        {/* Error Content */}
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center">
-          <div className="text-slate-500">
-            <Eye className="w-16 h-16 mx-auto mb-4 opacity-50" />
-            <h1 className="text-2xl font-bold mb-2 text-slate-900">Article Not Found</h1>
-            <p className="text-slate-600 mb-6">
-              {error || 'The article you are looking for does not exist or has been removed.'}
-            </p>
-            <Link href="/news">
-              <Button className="bg-slate-900 hover:bg-slate-800">
-                Browse All News
-              </Button>
-            </Link>
-          </div>
+      <div className="min-h-screen bg-white flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-slate-900 mb-4">{t('news.title')}</h1>
+          <p className="text-slate-600 mb-6">
+            {error || 'The article you are looking for does not exist or has been removed.'}
+          </p>
+          <Link href="/news">
+            <Button className="bg-slate-900 hover:bg-slate-800">
+              {t('news.backToNews')}
+            </Button>
+          </Link>
         </div>
       </div>
     )
   }
+
+  const title = language === 'mn' ? article.titleMn : article.titleEn
+  const content = language === 'mn' ? article.contentMn : article.contentEn
+  const excerpt = language === 'mn' ? article.excerptMn : article.excerptEn
 
   return (
     <div className="min-h-screen bg-white">
@@ -211,7 +163,7 @@ export default function NewsArticlePage() {
           <div className="flex items-center justify-between">
             <Link href="/news" className="flex items-center space-x-2 hover:text-slate-300 transition-colors">
               <ArrowLeft className="w-5 h-5" />
-              <span>Back to News</span>
+              <span>{t('news.backToNews')}</span>
             </Link>
             <div className="flex items-center space-x-2">
               <img src="/logo.svg" alt="Logo" className="w-8 h-8 text-red-600" />
@@ -226,7 +178,7 @@ export default function NewsArticlePage() {
         {/* Article Header */}
         <header className="mb-8">
           <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">
-            {article.title}
+            {title}
           </h1>
           
           <div className="flex flex-wrap items-center gap-4 text-slate-600 mb-6">
@@ -247,12 +199,12 @@ export default function NewsArticlePage() {
               className="flex items-center space-x-2 border-slate-300 text-slate-700 hover:bg-slate-50"
             >
               <Share2 className="w-4 h-4" />
-              <span>Share</span>
+              <span>{t('news.share')}</span>
             </Button>
           </div>
 
           <p className="text-xl text-slate-700 leading-relaxed">
-            {article.excerpt}
+            {excerpt}
           </p>
         </header>
 
@@ -261,7 +213,7 @@ export default function NewsArticlePage() {
           <div className="mb-8">
             <img
               src={article.featuredImage}
-              alt={article.title}
+              alt={title}
               className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
             />
           </div>
@@ -276,7 +228,7 @@ export default function NewsArticlePage() {
                 lineHeight: '1.8',
                 fontSize: '1.1rem'
               }}
-              dangerouslySetInnerHTML={{ __html: article.content }}
+              dangerouslySetInnerHTML={{ __html: content }}
             />
           </CardContent>
         </Card>
