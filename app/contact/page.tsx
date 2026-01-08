@@ -162,7 +162,7 @@ export default function ContactPage() {
                     <Mail className="w-6 h-6 text-blue-600" />
                     <div>
                       <h3 className="font-semibold text-slate-900">{t('contact.email')}</h3>
-                      <p className="text-slate-600">info@msic.mn</p>
+                      <p className="text-slate-600">contact@msic.mn</p>
                     </div>
                   </div>
                 </CardContent>
@@ -174,7 +174,7 @@ export default function ContactPage() {
                     <Phone className="w-6 h-6 text-blue-600" />
                     <div>
                       <h3 className="font-semibold text-slate-900">{t('contact.phone')}</h3>
-                      <p className="text-slate-600">+976 11 123 456</p>
+                      <p className="text-slate-600">+976-88113400</p>
                     </div>
                   </div>
                 </CardContent>

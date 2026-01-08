@@ -5,6 +5,7 @@ import { Header } from "@/components/Header"
 import { Hero } from "@/components/Hero"
 import { FeaturedContent } from "@/components/FeaturedContent"
 import { NewsSection } from "@/components/NewsSection"
+import { ClinicalGuidelinesSection } from "@/components/ClinicalGuidelinesSection"
 import ContactSection from "@/components/ContactSection"
 import { Footer } from "@/components/Footer"
 import { useLanguage } from "@/lib/language-context"
@@ -24,18 +25,20 @@ export default function Home() {
             {/* Gradient overlay for depth */}
             <div className="absolute inset-0 bg-gradient-to-r from-black/10 via-transparent to-black/10 z-10"></div>
             
-            {/* Main banner image with hover effects */}
-            <div className="relative overflow-hidden">
-              <Image
-                src="/1.png"
-                alt="MSIC Website Banner"
-                width={1200}
-                height={300}
-                className="w-full h-auto object-contain transform transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
-                priority
-              />
-              
-              {/* Shimmer effect on hover */}
+              {/* Main banner image with hover effects */}
+              <div className="relative overflow-hidden">
+                <video 
+                  autoPlay 
+                  loop 
+                  muted 
+                  playsInline
+                  className="w-full h-auto object-cover transform transition-all duration-700 group-hover:scale-105 group-hover:brightness-110"
+                >
+                  <source src="/videos/0-02-08-4801caae0193433367ee774006c3b18b48c1c7e3b668b4a7ebdaa1e481c2fc26_222e3a8f266.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                
+                {/* Shimmer effect on hover */}
               <div className="absolute inset-0 -translate-x-full group-hover:translate-x-full transition-transform duration-1000 bg-gradient-to-r from-transparent via-white/20 to-transparent skew-x-12"></div>
             </div>
             
@@ -141,6 +144,7 @@ export default function Home() {
       </section>
       
       <NewsSection />
+      <ClinicalGuidelinesSection />
       <ContactSection />
       <Footer />
     </div>

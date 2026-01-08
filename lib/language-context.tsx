@@ -13,6 +13,7 @@ type TranslationKey =
   | 'contactSection.title' | 'contactSection.description' | 'contactSection.address' | 'contactSection.phone' | 'contactSection.email' | 'contactSection.hours' | 'contactSection.available' | 'contactSection.sendMessage'
   | 'events.title' | 'events.description' | 'events.expertSpeakers' | 'events.expertSpeakersDesc' | 'events.workshops' | 'events.workshopsDesc' | 'events.networking' | 'events.networkingDesc' | 'events.education' | 'events.educationDesc'
   | 'featured.title' | 'featured.subtitle' | 'featured.guidelines' | 'featured.guidelinesDesc' | 'featured.cme' | 'featured.cmeDesc' | 'featured.cases' | 'featured.casesDesc' | 'featured.viewAll' | 'featured.learnMore'
+  | 'guidelines.title' | 'guidelines.subtitle' | 'guidelines.download'
   | 'common.loading' | 'common.error' | 'common.retry' | 'common.close' | 'common.save' | 'common.cancel' | 'common.edit' | 'common.delete' | 'common.view'
 
 type Translations = Record<TranslationKey, string>
@@ -126,6 +127,11 @@ const translations: Record<Language, Translations> = {
     'featured.viewAll': 'Бүгдийг үзэх',
     'featured.learnMore': 'Дэлгэрэнгүй',
     
+    // Guidelines
+    'guidelines.title': 'Эмчилгээний удирдамж',
+    'guidelines.subtitle': 'Татаж авах боломжтой эмчилгээний удирдамж болон протоколууд',
+    'guidelines.download': 'Татах',
+
     // Common
     'common.loading': 'Ачааллаж байна...',
     'common.error': 'Алдаа гарлаа',
@@ -239,6 +245,11 @@ const translations: Record<Language, Translations> = {
     'featured.viewAll': 'View All',
     'featured.learnMore': 'Learn More',
     
+    // Guidelines
+    'guidelines.title': 'Clinical Guidelines',
+    'guidelines.subtitle': 'Downloadable clinical guidelines and protocols',
+    'guidelines.download': 'Download',
+
     // Common
     'common.loading': 'Loading...',
     'common.error': 'Error occurred',
