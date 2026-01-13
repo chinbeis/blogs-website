@@ -7,6 +7,8 @@ import { ArrowLeft, Search } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useLanguage } from '@/lib/language-context'
+import { Header } from '@/components/Header'
+import { Footer } from '@/components/Footer'
 
 interface NewsArticle {
   id: string
@@ -72,33 +74,13 @@ export default function NewsPage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-blue-800 text-white py-6">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            <Link href="/" className="flex items-center space-x-2 hover:text-amber-500 transition-colors">
-              <ArrowLeft className="w-5 h-5" />
-              <span>{t('news.backToHome')}</span>
-            </Link>
-            <div className="flex items-center space-x-2">
-              <Image 
-                src="/logo.svg" 
-                alt="MSIC Logo" 
-                width={32} 
-                height={32} 
-                className="h-8 w-8"
-              />
-              <span className="text-2xl font-bold">MSIC</span>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header />
 
-      {/* Hero Section */}
-      <section className="bg-gradient-to-r from-blue-800 to-red-600 text-white py-16">
+      {/* Page Title Section */}
+      <section className="py-16 bg-slate-50 border-b border-slate-200">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">{t('news.title')}</h1>
-          <p className="text-xl md:text-2xl text-blue-100 max-w-3xl mx-auto">
+          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">{t('news.title')}</h1>
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
             {t('news.subtitle')}
           </p>
         </div>
@@ -168,6 +150,8 @@ export default function NewsPage() {
           )}
         </div>
       </section>
+      
+      <Footer />
     </div>
   )
 }

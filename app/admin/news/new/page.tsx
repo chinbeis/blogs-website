@@ -82,7 +82,7 @@ export default function NewArticle() {
     if (!files || files.length === 0) return
 
     setImageUploading(true)
-    const uploadToast = toast.loading(`Uploading ${files.length} image(s)...`)
+    const uploadToast = toast.loading(`Uploading ${files.length} file(s)...`)
     
     try {
       const uploadPromises = Array.from(files).map(async (file) => {
@@ -109,10 +109,10 @@ export default function NewArticle() {
 
       const uploadedImages = await Promise.all(uploadPromises)
       setAdditionalImages(prev => [...prev, ...uploadedImages])
-      toast.success(`${files.length} image(s) uploaded successfully!`, { id: uploadToast })
+      toast.success(`${files.length} file(s) uploaded successfully!`, { id: uploadToast })
     } catch (error) {
-      console.error('Error uploading images:', error)
-      toast.error('Error uploading some images', { id: uploadToast })
+      console.error('Error uploading files:', error)
+      toast.error('Error uploading some files', { id: uploadToast })
     } finally {
       setImageUploading(false)
     }
@@ -395,22 +395,22 @@ export default function NewArticle() {
                 )}
               </div>
 
-              {/* Additional Images Upload */}
+              {/* Additional Files Upload */}
               <div className="space-y-4">
                 <Label className="text-base font-medium text-gray-700 flex items-center space-x-2">
                   <ImageIcon className="w-5 h-5 text-blue-600" />
-                  <span>Additional Images Gallery</span>
-                  <span className="text-sm text-gray-500 font-normal">(Optional)</span>
+                  <span>Attachments / Gallery</span>
+                  <span className="text-sm text-gray-500 font-normal">(Images, Videos, PDFs)</span>
                 </Label>
                 
                 {/* Upload Area */}
                 <div className="border-2 border-dashed border-blue-200/60 rounded-lg p-6 text-center bg-blue-50/20 hover:bg-blue-50/30 transition-colors">
                   <Plus className="w-10 h-10 mx-auto mb-3 text-blue-400" />
-                  <p className="text-base text-gray-700 mb-2 font-medium">Add more images</p>
-                  <p className="text-sm text-gray-500 mb-4">Select multiple images for the gallery</p>
+                  <p className="text-base text-gray-700 mb-2 font-medium">Add files</p>
+                  <p className="text-sm text-gray-500 mb-4">Select images, videos or PDFs</p>
                   <Input
                     type="file"
-                    accept="image/*"
+                    accept="image/*,application/pdf,video/*"
                     multiple
                     onChange={handleAdditionalImageUpload}
                     disabled={imageUploading}
@@ -424,44 +424,58 @@ export default function NewArticle() {
                   )}
                 </div>
 
-                {/* Additional Images Preview */}
+                {/* Additional Files Preview */}
                 {additionalImages.length > 0 && (
                   <div className="space-y-4">
                     <p className="text-sm font-medium text-gray-700">
-                      Gallery Images ({additionalImages.length})
+                      Files ({additionalImages.length})
                     </p>
                     <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                      {additionalImages.map((image) => (
-                        <div key={image.id} className="relative group">
-                          <div className="border border-blue-200/60 rounded-lg overflow-hidden bg-white">
-                            <Image
-                              src={image.url}
-                              alt={image.alt}
-                              width={200}
-                              height={150}
-                              className="w-full h-32 object-cover"
-                            />
+                      {additionalImages.map((image) => {
+                        const isImage = /\.(jpg|jpeg|png|gif|webp|avif)$/i.test(image.originalName);
+                        const isVideo = /\.(mp4|webm|ogg)$/i.test(image.originalName);
+                        
+                        return (
+                          <div key={image.id} className="relative group">
+                            <div className="border border-blue-200/60 rounded-lg overflow-hidden bg-white h-32 flex items-center justify-center relative">
+                              {isImage ? (
+                                <Image
+                                  src={image.url}
+                                  alt={image.alt}
+                                  width={200}
+                                  height={150}
+                                  className="w-full h-32 object-cover"
+                                />
+                              ) : isVideo ? (
+                                <video src={image.url} className="w-full h-32 object-cover" controls />
+                              ) : (
+                                <div className="flex flex-col items-center justify-center p-4">
+                                  <FileText className="w-8 h-8 text-gray-400 mb-2" />
+                                  <span className="text-xs text-gray-500 truncate w-full text-center px-2">{image.originalName}</span>
+                                </div>
+                              )}
+                            </div>
+                            <Button
+                              type="button"
+                              variant="destructive"
+                              size="sm"
+                              className="absolute top-2 right-2 rounded-full bg-red-500 hover:bg-red-600 opacity-0 group-hover:opacity-100 transition-opacity"
+                              onClick={() => removeAdditionalImage(image.id)}
+                            >
+                              <X className="w-3 h-3" />
+                            </Button>
+                            <div className="mt-2">
+                              <Input
+                                type="text"
+                                placeholder="Alt text (optional)"
+                                value={image.alt}
+                                onChange={(e) => updateImageAlt(image.id, e.target.value)}
+                                className="text-xs border border-blue-200/60 focus:ring-1 focus:ring-blue-500/50"
+                              />
+                            </div>
                           </div>
-                          <Button
-                            type="button"
-                            variant="destructive"
-                            size="sm"
-                            className="absolute top-2 right-2 rounded-full bg-red-500 hover:bg-red-600 opacity-0 group-hover:opacity-100 transition-opacity"
-                            onClick={() => removeAdditionalImage(image.id)}
-                          >
-                            <X className="w-3 h-3" />
-                          </Button>
-                          <div className="mt-2">
-                            <Input
-                              type="text"
-                              placeholder="Alt text (optional)"
-                              value={image.alt}
-                              onChange={(e) => updateImageAlt(image.id, e.target.value)}
-                              className="text-xs border border-blue-200/60 focus:ring-1 focus:ring-blue-500/50"
-                            />
-                          </div>
-                        </div>
-                      ))}
+                        );
+                      })}
                     </div>
                   </div>
                 )}
