@@ -59,13 +59,14 @@ export async function POST(request: NextRequest) {
     const filename = `${timestamp}-${Math.random().toString(36).substring(2)}.${extension}`
 
     // Optimize image with Sharp (only for images)
-    let processedBuffer = buffer
+    let processedBuffer: Buffer = buffer
     if (file.type.startsWith('image/')) {
       try {
-        processedBuffer = await sharp(buffer)
+        const optimized = await sharp(buffer)
           .resize(1200, 800, { fit: 'inside', withoutEnlargement: true })
           .jpeg({ quality: 85 })
           .toBuffer()
+        processedBuffer = Buffer.from(optimized)
       } catch (error) {
         console.error('Error optimizing image:', error)
         // Continue with original buffer if optimization fails

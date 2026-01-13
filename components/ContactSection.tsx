@@ -33,27 +33,27 @@ export default function ContactSection() {
   }
   
   return (
-    <section className="py-16 bg-[#F5F5F5]">
+    <section className="py-16 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
-          <h2 className="text-3xl md:text-4xl font-bold text-[#1a237e] mb-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-slate-900 mb-4">
             {t('contactSection.title')}
           </h2>
-          <p className="text-lg text-gray-700 max-w-2xl mx-auto">
+          <p className="text-lg text-slate-600 max-w-2xl mx-auto">
             {t('contactSection.description')}
           </p>
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Form */}
-          <Card className="shadow-lg border-0 order-2 lg:order-1">
+          <Card className="shadow-lg border border-slate-100 order-2 lg:order-1">
             <CardHeader>
-              <CardTitle className="text-2xl font-bold text-[#1a237e]">{t('contact.getInTouch')}</CardTitle>
+              <CardTitle className="text-2xl font-bold text-slate-900">{t('contact.getInTouch')}</CardTitle>
             </CardHeader>
             <CardContent>
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="space-y-2">
-                  <Label htmlFor="name">{t('contact.name')}</Label>
+                  <Label htmlFor="name" className="text-slate-700">{t('contact.name')}</Label>
                   <Input 
                     id="name" 
                     name="name" 
@@ -61,11 +61,12 @@ export default function ContactSection() {
                     onChange={handleChange}
                     required 
                     placeholder={t('contact.name')}
+                    className="border-slate-200 focus:ring-slate-500 focus:border-slate-500"
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="email">{t('contact.email')}</Label>
+                  <Label htmlFor="email" className="text-slate-700">{t('contact.email')}</Label>
                   <Input 
                     id="email" 
                     name="email" 
@@ -74,11 +75,12 @@ export default function ContactSection() {
                     onChange={handleChange}
                     required 
                     placeholder={t('contact.email')}
+                    className="border-slate-200 focus:ring-slate-500 focus:border-slate-500"
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="subject">{t('contact.subject')}</Label>
+                  <Label htmlFor="subject" className="text-slate-700">{t('contact.subject')}</Label>
                   <Input 
                     id="subject" 
                     name="subject"
@@ -86,11 +88,12 @@ export default function ContactSection() {
                     onChange={handleChange}
                     required 
                     placeholder={t('contact.subject')}
+                    className="border-slate-200 focus:ring-slate-500 focus:border-slate-500"
                   />
                 </div>
                 
                 <div className="space-y-2">
-                  <Label htmlFor="message">{t('contact.message')}</Label>
+                  <Label htmlFor="message" className="text-slate-700">{t('contact.message')}</Label>
                   <Textarea 
                     id="message" 
                     name="message" 
@@ -99,10 +102,11 @@ export default function ContactSection() {
                     required 
                     placeholder={t('contact.message')}
                     rows={5}
+                    className="border-slate-200 focus:ring-slate-500 focus:border-slate-500 resize-none"
                   />
                 </div>
                 
-                <Button type="submit" className="w-full bg-[#1a237e] hover:bg-[#1a237e]/90 text-white py-6 text-lg">
+                <Button type="submit" className="w-full bg-slate-900 hover:bg-slate-800 text-white py-6 text-lg transition-colors">
                   <Send className="w-5 h-5 mr-2" />
                   {t('contact.send')}
                 </Button>
@@ -112,14 +116,14 @@ export default function ContactSection() {
 
           {/* Contact Information Cards */}
           <div className="space-y-6 order-1 lg:order-2">
-            <Card className="border-gray-200 hover:shadow-lg transition-shadow">
+            <Card className="border-slate-100 shadow-sm hover:shadow-md transition-all duration-300">
               <CardContent className="flex items-center p-6">
-                <div className="w-12 h-12 bg-[#4682b4] rounded-full flex items-center justify-center mr-6 flex-shrink-0">
-                  <MapPin className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mr-6 flex-shrink-0 transition-colors group-hover:bg-slate-200">
+                  <MapPin className="w-6 h-6 text-slate-600" />
                 </div>
                 <div>
-                  <h3 className="text-[#1a237e] font-bold text-lg mb-1">{t('contactSection.address')}</h3>
-                  <p className="text-gray-700 leading-relaxed text-sm">
+                  <h3 className="text-slate-900 font-bold text-lg mb-1">{t('contactSection.address')}</h3>
+                  <p className="text-slate-600 leading-relaxed text-sm">
                     Mongolian Society of Interventional Cardiology<br />
                     Shastin's Third State Central Hospital<br />
                     Ard Ayush street-1A, Bayangol District<br />
@@ -129,34 +133,34 @@ export default function ContactSection() {
               </CardContent>
             </Card>
 
-            <Card className="border-gray-200 hover:shadow-lg transition-shadow">
+            <Card className="border-slate-100 shadow-sm hover:shadow-md transition-all duration-300">
               <CardContent className="flex items-center p-6">
-                <div className="w-12 h-12 bg-[#dc2626] rounded-full flex items-center justify-center mr-6 flex-shrink-0">
-                  <Phone className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+                  <Phone className="w-6 h-6 text-slate-600" />
                 </div>
                 <div>
-                  <h3 className="text-[#1a237e] font-bold text-lg mb-1">{t('contactSection.phone')}</h3>
-                  <p className="text-gray-700 text-lg font-medium">
+                  <h3 className="text-slate-900 font-bold text-lg mb-1">{t('contactSection.phone')}</h3>
+                  <p className="text-slate-600 text-lg font-medium">
                     +976-88113400
                   </p>
-                  <p className="text-gray-600 text-sm">
+                  <p className="text-slate-500 text-sm">
                     {t('contactSection.available')}
                   </p>
                 </div>
               </CardContent>
             </Card>
 
-            <Card className="border-gray-200 hover:shadow-lg transition-shadow">
+            <Card className="border-slate-100 shadow-sm hover:shadow-md transition-all duration-300">
               <CardContent className="flex items-center p-6">
-                <div className="w-12 h-12 bg-[#16a34a] rounded-full flex items-center justify-center mr-6 flex-shrink-0">
-                  <Mail className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-slate-100 rounded-full flex items-center justify-center mr-6 flex-shrink-0">
+                  <Mail className="w-6 h-6 text-slate-600" />
                 </div>
                 <div>
-                  <h3 className="text-[#1a237e] font-bold text-lg mb-1">{t('contactSection.email')}</h3>
-                  <p className="text-gray-700 text-lg font-medium">
+                  <h3 className="text-slate-900 font-bold text-lg mb-1">{t('contactSection.email')}</h3>
+                  <p className="text-slate-600 text-lg font-medium">
                     contact@msic.mn
                   </p>
-                  <p className="text-gray-600 text-sm">
+                  <p className="text-slate-500 text-sm">
                     {t('contactSection.available')}
                   </p>
                 </div>
