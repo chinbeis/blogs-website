@@ -4,10 +4,12 @@ import { useState, useEffect } from 'react'
 import { useParams } from 'next/navigation'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
-import { Heart, ArrowLeft, Calendar, User, Share2, Eye, X, ChevronLeft, ChevronRight } from 'lucide-react'
+import { Heart, ArrowLeft, Calendar, User, Share2, Eye, X, ChevronLeft, ChevronRight, Sparkles } from 'lucide-react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { useLanguage } from '@/lib/language-context'
+import { Header } from '@/components/Header'
+import { Footer } from '@/components/Footer'
 
 interface NewsImage {
   id: string
@@ -121,25 +123,29 @@ export default function NewsArticlePage() {
   if (isLoading) {
     return (
       <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-slate-900"></div>
+        <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
       </div>
     )
   }
 
   if (error || !article) {
     return (
-      <div className="min-h-screen bg-white flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-slate-900 mb-4">{t('news.title')}</h1>
-          <p className="text-slate-600 mb-6">
-            {error || 'The article you are looking for does not exist or has been removed.'}
-          </p>
-          <Link href="/news">
-            <Button className="bg-slate-900 hover:bg-slate-800">
-              {t('news.backToNews')}
-            </Button>
-          </Link>
+      <div className="min-h-screen bg-white">
+        <Header />
+        <div className="flex items-center justify-center py-24">
+          <div className="text-center max-w-md px-4">
+            <h1 className="text-3xl font-bold text-slate-900 mb-4">{t('news.title')}</h1>
+            <p className="text-slate-600 mb-8 leading-relaxed">
+              {error || 'The article you are looking for does not exist or has been removed.'}
+            </p>
+            <Link href="/news">
+              <Button className="bg-blue-600 hover:bg-blue-700 rounded-xl px-8 py-6 font-bold shadow-lg shadow-blue-600/20">
+                {t('news.backToNews')}
+              </Button>
+            </Link>
+          </div>
         </div>
+        <Footer />
       </div>
     )
   }
@@ -150,141 +156,127 @@ export default function NewsArticlePage() {
 
   return (
     <div className="min-h-screen bg-white">
-      {/* Header */}
-      <header className="bg-slate-900 text-white py-6 relative overflow-hidden">
-        {/* Decorative elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-2 left-10 w-16 h-16 border border-slate-700 rounded-full opacity-20"></div>
-          <div className="absolute bottom-2 right-20 w-12 h-12 border border-slate-600 rounded-full opacity-15"></div>
-          <div className="absolute top-1/2 left-1/3 w-2 h-2 bg-slate-600 rounded-full opacity-30"></div>
-          <div className="absolute top-3 right-1/3 w-3 h-3 bg-slate-700 rounded-full opacity-25"></div>
+      <Header />
+      
+      {/* Article Header */}
+      <section className="py-24 bg-slate-900 text-white relative overflow-hidden">
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute top-0 right-0 w-96 h-96 bg-blue-500 rounded-full blur-3xl -mr-48 -mt-48"></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 bg-red-600 rounded-full blur-3xl -ml-48 -mb-48"></div>
         </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between">
-            <Link href="/news" className="flex items-center space-x-2 hover:text-slate-300 transition-colors">
-              <ArrowLeft className="w-5 h-5" />
-              <span>{t('news.backToNews')}</span>
-            </Link>
-            <div className="flex items-center space-x-2">
-              <img src="/logo.svg" alt="Logo" className="w-8 h-8 text-red-600" />
-              <span className="text-2xl font-bold">MSIC</span>
-            </div>
-          </div>
-        </div>
-      </header>
 
-      {/* Article Content */}
-      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Article Header */}
-        <header className="mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-slate-900 mb-4 leading-tight">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          <Link href="/news" className="inline-flex items-center space-x-2 text-blue-300 hover:text-white transition-colors mb-8 group">
+            <ArrowLeft className="w-5 h-5 group-hover:-translate-x-1 transition-transform" />
+            <span className="font-bold">{t('news.backToNews')}</span>
+          </Link>
+          
+          <h1 className="text-4xl md:text-6xl font-extrabold mb-8 leading-tight tracking-tight uppercase">
             {title}
           </h1>
           
-          <div className="flex flex-wrap items-center gap-4 text-slate-600 mb-6">
-            <div className="flex items-center space-x-2">
-              <Calendar className="w-4 h-4" />
-              <span>{formatDate(article.publishedAt || article.createdAt)}</span>
+          <div className="flex flex-wrap items-center gap-6 text-slate-300">
+            <div className="flex items-center space-x-2 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+              <Calendar className="w-4 h-4 text-red-400" />
+              <span className="font-medium">{formatDate(article.publishedAt || article.createdAt)}</span>
             </div>
             {article.author && (
-              <div className="flex items-center space-x-2">
-                <User className="w-4 h-4" />
-                <span>{article.author}</span>
+              <div className="flex items-center space-x-2 bg-white/5 px-4 py-2 rounded-full border border-white/10">
+                <User className="w-4 h-4 text-blue-400" />
+                <span className="font-medium uppercase tracking-wider text-xs">{article.author}</span>
               </div>
             )}
             <Button
               onClick={shareArticle}
               variant="outline"
               size="sm"
-              className="flex items-center space-x-2 border-slate-300 text-slate-700 hover:bg-slate-50"
+              className="rounded-full border-white/20 text-white hover:bg-white/10 px-6 font-bold uppercase text-xs tracking-widest h-10"
             >
-              <Share2 className="w-4 h-4" />
+              <Share2 className="w-4 h-4 mr-2" />
               <span>{t('news.share')}</span>
             </Button>
           </div>
+        </div>
+      </section>
 
-          <p className="text-xl text-slate-700 leading-relaxed">
+      {/* Article Content */}
+      <article className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="mb-12">
+          <p className="text-2xl text-slate-600 leading-relaxed font-bold border-l-8 border-red-500 pl-8 uppercase tracking-tight">
             {excerpt}
           </p>
-        </header>
+        </div>
 
         {/* Featured Image */}
         {article.featuredImage && (
-          <div className="mb-8">
+          <div className="mb-16 relative group">
+            <div className="absolute -inset-2 bg-gradient-to-r from-blue-600 to-red-600 rounded-2xl blur opacity-20 group-hover:opacity-30 transition-opacity"></div>
             <img
               src={article.featuredImage}
               alt={title}
-              className="w-full h-64 md:h-96 object-cover rounded-lg shadow-lg"
+              className="relative w-full h-[400px] md:h-[500px] object-cover rounded-xl shadow-2xl"
             />
           </div>
         )}
 
-        {/* Article Content */}
-        <Card className="border-0 shadow-lg bg-white mb-8">
-          <CardContent className="p-8">
-            <div 
-              className="prose prose-lg max-w-none prose-slate"
-              style={{
-                lineHeight: '1.8',
-                fontSize: '1.1rem'
-              }}
-              dangerouslySetInnerHTML={{ __html: content }}
-            />
-          </CardContent>
-        </Card>
+        {/* Main Content */}
+        <div className="bg-white rounded-3xl p-8 md:p-16 border border-slate-100 shadow-2xl shadow-blue-900/5 mb-16 relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-32 h-32 bg-blue-50 rounded-full -mr-16 -mt-16 opacity-50"></div>
+          <div 
+            className="prose prose-lg max-w-none prose-slate prose-headings:text-slate-900 prose-headings:font-black prose-headings:uppercase prose-p:text-slate-600 prose-p:leading-relaxed prose-p:font-medium prose-a:text-blue-600 prose-img:rounded-2xl prose-img:shadow-xl"
+            dangerouslySetInnerHTML={{ __html: content }}
+          />
+        </div>
 
         {/* Image Gallery */}
         {article.images && article.images.length > 0 && (
-          <Card className="border-0 shadow-lg bg-white mb-8">
-            <CardContent className="p-8">
-              <h3 className="text-2xl font-bold text-slate-900 mb-6 flex items-center space-x-2">
-                <Eye className="w-6 h-6 text-blue-600" />
-                <span>Image Gallery</span>
-              </h3>
-              
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {article.images.map((image, index) => (
-                  <div 
-                    key={image.id} 
-                    className="relative group cursor-pointer overflow-hidden rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105"
-                    onClick={() => openImageModal(image, index)}
-                  >
-                    <Image
-                      src={image.url}
-                      alt={image.alt || `Gallery image ${index + 1}`}
-                      width={300}
-                      height={200}
-                      className="w-full h-32 md:h-40 object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-300 flex items-center justify-center">
-                      <Eye className="w-6 h-6 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </div>
-                    {image.alt && (
-                      <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-2">
-                        <p className="text-white text-xs truncate">{image.alt}</p>
-                      </div>
-                    )}
-                  </div>
-                ))}
+          <div className="mb-16">
+            <h3 className="text-3xl font-black text-slate-900 mb-8 flex items-center space-x-3 uppercase tracking-tight">
+              <div className="w-12 h-12 rounded-2xl bg-blue-50 flex items-center justify-center shadow-inner">
+                <Eye className="w-7 h-7 text-blue-600" />
               </div>
-            </CardContent>
-          </Card>
+              <span>Image Gallery</span>
+            </h3>
+            
+            <div className="grid grid-cols-2 md:grid-cols-3 gap-8">
+              {article.images.map((image, index) => (
+                <div 
+                  key={image.id} 
+                  className="relative group cursor-pointer overflow-hidden rounded-[2rem] shadow-xl aspect-square border-4 border-white"
+                  onClick={() => openImageModal(image, index)}
+                >
+                  <Image
+                    src={image.url}
+                    alt={image.alt || `Gallery image ${index + 1}`}
+                    fill
+                    className="object-cover transition-all duration-700 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-blue-900/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-all duration-500 flex items-center justify-center">
+                    <div className="bg-white/20 backdrop-blur-md p-4 rounded-full scale-50 group-hover:scale-100 transition-all duration-500">
+                      <Eye className="w-8 h-8 text-white" />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         )}
 
         {/* Article Footer */}
-        <footer className="mt-12 pt-8 border-t border-slate-200">
-          <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
-            <div className="text-slate-600">
-              <p>Published by MSIC on {formatDate(article.publishedAt || article.createdAt)}</p>
+        <footer className="pt-12 border-t border-slate-100">
+          <div className="flex flex-col md:flex-row justify-between items-center gap-8 bg-blue-50 p-10 rounded-[2.5rem] border border-blue-100/50 shadow-inner">
+            <div>
+              <p className="text-slate-900 font-black text-xl mb-1 uppercase tracking-tight">MSIC Editorial Team</p>
+              <p className="text-slate-500 font-bold">Published on {formatDate(article.publishedAt || article.createdAt)}</p>
             </div>
-            <div className="flex space-x-4">
-              <Link href="/news">
-                <Button variant="outline" className="border-slate-300 text-slate-700 hover:bg-slate-50">
+            <div className="flex flex-col sm:flex-row space-y-3 sm:space-y-0 sm:space-x-4 w-full md:w-auto">
+              <Link href="/news" className="flex-1 md:flex-none">
+                <Button variant="outline" className="w-full border-blue-200 text-blue-600 hover:bg-blue-100 hover:border-blue-300 rounded-xl px-8 h-14 font-black uppercase transition-all tracking-wider">
                   More News
                 </Button>
               </Link>
-              <Link href="/contact">
-                <Button className="bg-slate-900 hover:bg-slate-800">
+              <Link href="/contact" className="flex-1 md:flex-none">
+                <Button className="w-full bg-slate-900 hover:bg-black text-white rounded-xl px-8 h-14 font-black uppercase shadow-lg transition-all tracking-wider">
                   Contact Us
                 </Button>
               </Link>
@@ -293,23 +285,53 @@ export default function NewsArticlePage() {
         </footer>
       </article>
 
-      {/* Footer */}
-      <footer className="bg-slate-900 text-white py-8 mt-16 relative overflow-hidden">
-        {/* Subtle decorative elements */}
-        <div className="absolute inset-0">
-          <div className="absolute top-2 left-1/4 w-8 h-8 border border-slate-700 rounded-full opacity-15"></div>
-          <div className="absolute bottom-2 right-1/4 w-6 h-6 border border-slate-600 rounded-full opacity-20"></div>
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-          <div className="flex items-center justify-center space-x-2 mb-4">
-            <img src="/logo.svg" alt="Logo" className="w-6 h-6 text-red-600" />
-            <span className="text-xl font-bold">MSIC</span>
+      <Footer />
+
+      {/* Image Modal */}
+      {selectedImage && (
+        <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center p-4" onClick={closeImageModal}>
+          <Button 
+            variant="ghost" 
+            className="absolute top-4 right-4 text-white hover:bg-white/10 rounded-full h-14 w-14 z-[110]"
+            onClick={closeImageModal}
+          >
+            <X className="h-10 w-10" />
+          </Button>
+          
+          <div className="relative w-full max-w-6xl h-[85vh] flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
+            <Button 
+              variant="ghost" 
+              className="absolute left-0 text-white hover:bg-white/10 rounded-full h-20 w-20 z-10 hidden md:flex"
+              onClick={() => navigateImage('prev')}
+            >
+              <ChevronLeft className="h-12 w-12" />
+            </Button>
+            
+            <div className="relative w-full h-full">
+              <Image
+                src={selectedImage.url}
+                alt={selectedImage.alt || "Gallery image"}
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+
+            <Button 
+              variant="ghost" 
+              className="absolute right-0 text-white hover:bg-white/10 rounded-full h-20 w-20 z-10 hidden md:flex"
+              onClick={() => navigateImage('next')}
+            >
+              <ChevronRight className="h-12 w-12" />
+            </Button>
           </div>
-          <p className="text-white/80">
-            © 2024 Mongolian Society of Interventional Cardiology. All rights reserved.
-          </p>
+          
+          <div className="absolute bottom-10 text-white text-center z-[110]" onClick={(e) => e.stopPropagation()}>
+            <p className="text-xl font-bold mb-2 uppercase tracking-wide">{selectedImage.alt || selectedImage.originalName}</p>
+            <p className="text-white/50 font-bold uppercase tracking-widest text-xs">Image {currentImageIndex + 1} of {article.images?.length}</p>
+          </div>
         </div>
-      </footer>
+      )}
     </div>
   )
 }

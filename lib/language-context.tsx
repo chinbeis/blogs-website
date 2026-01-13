@@ -5,7 +5,8 @@ import { createContext, useContext, useState, ReactNode } from 'react'
 type Language = 'mn' | 'en'
 
 type TranslationKey = 
-  | 'header.about' | 'header.education' | 'header.events' | 'header.news' | 'header.login' | 'header.dashboard'
+  | 'header.about' | 'header.education' | 'header.events' | 'header.news' | 'header.login' | 'header.dashboard' | 'header.contact'
+  | 'header.education.women' | 'header.education.cme' | 'header.education.cases'
   | 'hero.title' | 'hero.subtitle' | 'hero.joinSociety' | 'hero.learnMore' | 'hero.members' | 'hero.events' | 'hero.publications' | 'hero.years'
   | 'footer.quickLinks' | 'footer.resources' | 'footer.about' | 'footer.membership' | 'footer.education' | 'footer.research' | 'footer.guidelines' | 'footer.cme' | 'footer.caseReports' | 'footer.publications' | 'footer.events' | 'footer.contact' | 'footer.copyright' | 'footer.description' | 'footer.socialMedia'
   | 'news.title' | 'news.subtitle' | 'news.search' | 'news.backToNews' | 'news.browseMore' | 'news.contact' | 'news.share' | 'news.noArticles' | 'news.clearSearch' | 'news.loading' | 'news.readMore' | 'news.backToHome'
@@ -29,14 +30,18 @@ const translations: Record<Language, Translations> = {
     // Header
     'header.about': 'Бидний тухай',
     'header.education': 'Боловсрол',
+    'header.education.women': 'Эмэгтэйчүүдийн эрдэм',
+    'header.education.cme': 'Тасралтгүй сургалт',
+    'header.education.cases': 'Тохиолдлын судалгаа',
     'header.events': 'Арга хэмжээ',
     'header.news': 'Мэдээ',
+    'header.contact': 'Бидэнтэй холбогдох',
     'header.login': 'Нэвтрэх',
     'header.dashboard': 'Удирдлагын самбар',
     
     // Hero Section
-    'hero.title': 'Монголын зүрх, судсан дотуурх мэс заслын эмч нарын нийгэмлэг',
-    'hero.subtitle': 'Монголын зүрх, судсан дотуурх мэс заслын эмч нарын нийгэмлэг нь дэвшилтэт судалгаа, боловсрол, эмнэлзүйн шилдэг ажиллагаагаар зүрхний судасны эрүүл мэндийг сайжруулахад зориулагдсан.',
+    'hero.title': 'Монгол зүрх судсан дотуурх мэс заслын эмч нарын нийгэмлэг',
+    'hero.subtitle': 'Дэвшилтэт судалгаа, боловсрол, эмнэлзүйн шилдэг ажиллагаагаар зүрхний судасны эрүүл мэндийг сайжруулахад зориулагдсан.',
     'hero.joinSociety': 'Нийгэмлэгт нэгдэх',
     'hero.learnMore': 'Дэлгэрэнгүй',
     'hero.members': 'Гишүүд',
@@ -47,17 +52,17 @@ const translations: Record<Language, Translations> = {
     // Footer
     'footer.quickLinks': 'Шуурхай холбоос',
     'footer.resources': 'Нөөц',
-    'footer.about': 'MSIC-ийн тухай',
+    'footer.about': 'Бидний тухай',
     'footer.membership': 'Гишүүнчлэл',
     'footer.education': 'Боловсрол',
     'footer.research': 'Судалгаа',
     'footer.guidelines': 'Удирдамж',
-    'footer.cme': 'CME хөтөлбөр',
+    'footer.cme': 'Тасралтгүй сургалт',
     'footer.caseReports': 'Тохиолдлын тайлан',
     'footer.publications': 'Нийтлэл',
     'footer.events': 'Арга хэмжээ',
     'footer.contact': 'Холбоо барих',
-    'footer.copyright': '© 2024 Монголын зүрх, судсан дотуурх мэс заслын эмч нарын нийгэмлэг. Бүх эрх хуулиар хамгаалагдсан.',
+    'footer.copyright': '© 2024 Монгол зүрх судсан дотуурх мэс заслын эмч нарын нийгэмлэг. Бүх эрх хуулиар хамгаалагдсан.',
     'footer.description': 'Боловсрол, судалгаа, эмнэлзүйн шилдэг ажиллагаагаар зүрхний судасны эмчилгээг дэвшүүлэхэд зориулагдсан. Монгол болон түүнээс цааш зүрхний судасны эрүүл мэндийг сайжруулах.',
     'footer.socialMedia': 'Нийгмийн сүлжээ',
     
@@ -73,11 +78,11 @@ const translations: Record<Language, Translations> = {
     'news.clearSearch': 'Хайлтыг цэвэрлэх',
     'news.loading': 'Ачааллаж байна...',
     'news.readMore': 'Дэлгэрэнгүй унших',
-    'news.backToHome': 'Нүүр хуудас руу буцах',
+    'news.backToHome': 'Нүүр хуудас рүү буцах',
     
     // Contact
-    'contact.title': 'Холбоо барих',
-    'contact.subtitle': 'Бидэнтэй холбогдох',
+    'contact.title': 'Бидэнтэй холбогдох',
+    'contact.subtitle': 'Холбоо барих',
     'contact.backToHome': 'Нүүр хуудас руу буцах',
     'contact.getInTouch': 'Бидэнтэй холбогдоорой',
     'contact.description': 'Асуулт, санал хүсэлт эсвэл хамтын ажиллагааны талаар бидэнтэй холбогдоход таатай байна. Бид танд хариулахыг хүсч байна.',
@@ -105,7 +110,7 @@ const translations: Record<Language, Translations> = {
     
     // Events
     'events.title': 'Удахгүй болох арга хэмжээ',
-    'events.description': 'Зүрхний судасны эмчилгээний хамгийн сүүлийн үеийн хурал, семинар, боловсролын арга хэмжээнүүдэд оролцоорой. Манай арга хэмжээнүүд тэргүүлэх шинжээчид, судлаачид, практик эмч нарыг нэгтгэж мэдлэг солилцож салбарыг хөгжүүлдэг.',
+    'events.description': 'Зүрхний судасны эмчилгээний хамгийн сүүлийн үеийн хурал, семинар, боловсролын арга хэмжээнүүдэд оролцоорой.',
     'events.expertSpeakers': 'Шинжээч илтгэгчид',
     'events.expertSpeakersDesc': 'Нэр хүндтэй зүрхний эмч, салбарын удирдагч нараас суралцаарай',
     'events.workshops': 'Практик семинар',
@@ -120,7 +125,7 @@ const translations: Record<Language, Translations> = {
     'featured.subtitle': 'Зүрхний судасны эмчилгээний мэдлэгээ дээшлүүлэхэд зориулсан боловсролын нөөц, тохиолдлын судалгаа, удахгүй болох арга хэмжээнүүдийг судлаарай.',
     'featured.guidelines': 'Эмчилгээний удирдамж',
     'featured.guidelinesDesc': 'Зүрхний судасны эмчилгээний хамгийн сүүлийн үеийн удирдамж, протокол',
-    'featured.cme': 'CME хөтөлбөр',
+    'featured.cme': 'Тасралтгүй сургалт',
     'featured.cmeDesc': 'Үргэлжилсэн эмнэлзүйн боловсролын хөтөлбөр, сургалт',
     'featured.cases': 'Тохиолдлын судалгаа',
     'featured.casesDesc': 'Бодит тохиолдлын дэлгэрэнгүй шинжилгээ, сургамж',
@@ -147,8 +152,12 @@ const translations: Record<Language, Translations> = {
     // Header
     'header.about': 'About',
     'header.education': 'Education',
+    'header.education.women': 'Women in Intervention',
+    'header.education.cme': 'CME Programs',
+    'header.education.cases': 'Case Studies',
     'header.events': 'Events',
     'header.news': 'News',
+    'header.contact': 'Contact Us',
     'header.login': 'Login',
     'header.dashboard': 'Dashboard',
     
@@ -176,7 +185,7 @@ const translations: Record<Language, Translations> = {
     'footer.events': 'Events',
     'footer.contact': 'Contact',
     'footer.copyright': '© 2024 Mongolian Society of Interventional Cardiology. All rights reserved.',
-    'footer.description': 'Dedicated to advancing interventional cardiology through education, research, and clinical excellence. Improving cardiovascular health across Mongolia and beyond.',
+    'footer.description': 'Dedicated to advancing interventional cardiology through education, research, and clinical excellence.',
     'footer.socialMedia': 'Follow Us',
     
     // News
@@ -223,7 +232,7 @@ const translations: Record<Language, Translations> = {
     
     // Events
     'events.title': 'Upcoming Events',
-    'events.description': 'Join us for our latest conferences, workshops, and educational events in interventional cardiology. Our events bring together leading experts, researchers, and practitioners to share knowledge and advance the field.',
+    'events.description': 'Join us for our latest conferences, workshops, and educational events in interventional cardiology.',
     'events.expertSpeakers': 'Expert Speakers',
     'events.expertSpeakersDesc': 'Learn from renowned cardiologists and industry leaders',
     'events.workshops': 'Hands-on Workshops',
@@ -235,7 +244,7 @@ const translations: Record<Language, Translations> = {
     
     // Featured Content
     'featured.title': 'Featured Content',
-    'featured.subtitle': 'Explore our educational resources, case studies, and upcoming events designed to advance your knowledge in interventional cardiology.',
+    'featured.subtitle': 'Explore our educational resources, case studies, and upcoming events.',
     'featured.guidelines': 'Clinical Guidelines',
     'featured.guidelinesDesc': 'Latest evidence-based guidelines and protocols for interventional cardiology',
     'featured.cme': 'CME Programs',

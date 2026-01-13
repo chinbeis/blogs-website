@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react'
 import { Button } from "@/components/ui/button"
 import NewsCard from "@/components/NewsCard"
-import { ArrowRight } from "lucide-react"
+import { ArrowRight, Sparkles } from "lucide-react"
 import Link from 'next/link'
 import { useLanguage } from "@/lib/language-context"
 
@@ -22,7 +22,7 @@ interface NewsArticle {
 }
 
 export function NewsSection() {
-  const { t } = useLanguage()
+  const { t, language } = useLanguage()
   const [articles, setArticles] = useState<NewsArticle[]>([])
   const [isLoading, setIsLoading] = useState(true)
 
@@ -54,10 +54,11 @@ export function NewsSection() {
 
   if (isLoading) {
     return (
-      <section className="py-20 bg-white">
+      <section className="py-24 bg-white relative">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
-            <p className="text-slate-600">{t('common.loading')}</p>
+            <div className="w-12 h-12 border-4 border-blue-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p className="text-blue-600 font-medium">{t('common.loading')}</p>
           </div>
         </div>
       </section>
@@ -65,20 +66,44 @@ export function NewsSection() {
   }
 
   return (
-    <section className="py-20 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-900 mb-6">
-            {t('news.title')}
-          </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto">
-            {t('news.subtitle')}
-          </p>
+    <section className="py-24 bg-white relative overflow-hidden">
+      {/* Decorative accents */}
+      <div className="absolute top-0 right-0 w-1/3 h-full bg-blue-50/30 skew-x-12 transform origin-top-right -z-10"></div>
+      <div className="absolute top-1/4 left-10 text-red-100 opacity-50">
+        <Sparkles className="w-12 h-12" />
+      </div>
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between mb-16 gap-6">
+          <div className="max-w-2xl">
+            <div className="inline-flex items-center space-x-2 px-3 py-1 rounded-full bg-blue-50 border border-blue-100 text-blue-600 text-xs font-bold uppercase tracking-wider mb-4">
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-600"></span>
+              </span>
+              <span>{language === 'mn' ? 'Мэдээ мэдээлэл' : 'Latest Updates'}</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-extrabold text-slate-900 mb-6 tracking-tight">
+              {t('news.title')}
+            </h2>
+            <p className="text-xl text-slate-600 leading-relaxed">
+              {t('news.subtitle')}
+            </p>
+          </div>
+          
+          <div className="hidden md:block">
+            <Link href="/news">
+              <Button variant="outline" className="border-blue-600 text-blue-600 hover:bg-blue-600 hover:text-white rounded-xl px-6 py-6 font-bold transition-all shadow-sm">
+                {t('news.browseMore')}
+                <ArrowRight className="ml-2 w-5 h-5" />
+              </Button>
+            </Link>
+          </div>
         </div>
         
         {articles.length === 0 ? (
-          <div className="text-center py-12">
-            <p className="text-slate-600">{t('news.noArticles')}</p>
+          <div className="text-center py-24 bg-slate-50 rounded-3xl border border-dashed border-slate-300">
+            <p className="text-slate-500 text-lg">{t('news.noArticles')}</p>
           </div>
         ) : (
           <>
@@ -98,12 +123,12 @@ export function NewsSection() {
                   date={formatDate(article.publishedAt)}
                   href={`/news/${article.id}`}
                 />
-              ))})
+              ))}
             </div>
             
-            <div className="text-center">
+            <div className="text-center md:hidden">
               <Link href="/news">
-                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3">
+                <Button size="lg" className="bg-blue-600 hover:bg-blue-700 text-white px-8 py-4 rounded-xl font-bold shadow-lg w-full">
                   {t('news.browseMore')}
                   <ArrowRight className="ml-2 w-5 h-5" />
                 </Button>

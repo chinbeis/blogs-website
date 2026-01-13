@@ -2,23 +2,31 @@ import { NextRequest, NextResponse } from 'next/server'
 import { getServerSession } from 'next-auth'
 import { authOptions } from '@/lib/auth'
 import { db, newsArticles, images, NewNewsArticle, NewImage } from '@/lib/db'
-import { eq, desc } from 'drizzle-orm'
+import { eq, desc, and } from 'drizzle-orm'
 
 // GET - Fetch all news articles
 export async function GET(request: NextRequest) {
   try {
     const { searchParams } = new URL(request.url)
     const published = searchParams.get('published')
+    const category = searchParams.get('category')
     
-    let articles
+    let query = db.select().from(newsArticles)
+    const conditions = []
     
     if (published === 'true') {
-      articles = await db.select().from(newsArticles)
-        .where(eq(newsArticles.isPublished, true))
-        .orderBy(desc(newsArticles.createdAt))
+      conditions.push(eq(newsArticles.isPublished, true))
+    }
+    
+    if (category) {
+      conditions.push(eq(newsArticles.category, category))
+    }
+    
+    let articles
+    if (conditions.length > 0) {
+      articles = await query.where(and(...conditions)).orderBy(desc(newsArticles.createdAt))
     } else {
-      articles = await db.select().from(newsArticles)
-        .orderBy(desc(newsArticles.createdAt))
+      articles = await query.orderBy(desc(newsArticles.createdAt))
     }
     
     return NextResponse.json(articles)
@@ -48,6 +56,7 @@ export async function POST(request: NextRequest) {
       titleMn, excerptMn, contentMn,
       titleEn, excerptEn, contentEn,
       featuredImage, iconType, gradientFrom, gradientTo, isPublished,
+      category = 'news',
       additionalImages = []
     } = body
 
@@ -73,6 +82,7 @@ export async function POST(request: NextRequest) {
       contentEn,
       slug,
       featuredImage,
+      category,
       iconType: iconType || 'calendar',
       gradientFrom: gradientFrom || 'from-blue-800',
       gradientTo: gradientTo || 'to-red-600',

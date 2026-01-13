@@ -30,6 +30,7 @@ export const newsArticles = pgTable('news_articles', {
   iconType: text('icon_type').notNull().default('calendar'),
   gradientFrom: text('gradient_from').notNull().default('from-blue-800'),
   gradientTo: text('gradient_to').notNull().default('to-red-600'),
+  category: text('category').notNull().default('news'), // Added category field
   isPublished: boolean('is_published').notNull().default(false),
   publishedAt: timestamp('published_at'),
   authorId: uuid('author_id').notNull().references(() => users.id),
