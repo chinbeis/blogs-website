@@ -129,10 +129,10 @@ export default function Home() {
                 {/* Image with multiple effects */}
                 <div className="relative overflow-hidden">
                   <Image
-                    src="/2.png"
-                    alt="MSIC Event Banner"
-                    width={800}
-                    height={600}
+                    src="/nomadic-tct-2026.jpg"
+                    alt="NOMADIC TCT 2026 Event Banner"
+                    width={1600}
+                    height={906}
                     className="w-full h-auto object-contain transform transition-all duration-700 group-hover:scale-110 group-hover:brightness-105"
                   />
                   
